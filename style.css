@@ -600,6 +600,13 @@ header::before {
   }
 }
 
+@supports not (backdrop-filter: blur(28px)) {
+  header,
+  .primary-navigation {
+    background: rgba(0, 0, 0, 0.9);
+  }
+}
+
 /* Disables scroll when mobile nav opens */
 body.nav-open {
   overflow: hidden;

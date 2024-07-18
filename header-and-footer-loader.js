@@ -4,6 +4,8 @@ function loadHeaderAndFooter() {
         .then(response => response.text())
         .then(data => {
             document.body.insertAdjacentHTML('afterbegin', data);
+            // Dispatch a custom event when header is loaded
+            document.dispatchEvent(new Event('headerLoaded'));
         });
 
     // Load footer

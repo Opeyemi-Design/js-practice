@@ -524,6 +524,7 @@ header::before {
   background: none;
   border: none;
   cursor: pointer;
+  padding: var(--size-100-12px);
 }
 
 .icon-close {

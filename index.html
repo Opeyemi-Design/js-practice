@@ -9,18 +9,27 @@
   </head>
 
   <body>
-    <header>
+    <header class="primary-header">
       <div class="wide-container">
-        <a href="/"><img src="images/01-general/opeyemi-logo.svg" alt="Site Logo"></a>
-        <nav class="primary-navigation">
-          <ul role="list" class="nav-list">
-            <li><a href="/" class="secondary-button-medium">Home</a></li>
-            <li><a href="/projects.html" class="secondary-button-medium">Projects</a></li>
-            <li><a href="/about-me.html" class="secondary-button-medium">About Me</a></li>
-            <li><a href="/Opeyemi-Adetifa-Resume.pdf" target="_blank" rel="noopener noreferrer" class="secondary-button-medium">CV</a></li>
-            <li><a href="/contact-me.html" class="primary-button-medium">Contact Me</a></li>
-          </ul>
-        </nav>
+        <div class="nav-wrapper flex">
+          <a href="/"><img src="images/01-general/opeyemi-logo.svg" alt="Site Logo"></a>
+
+          <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
+            <img class="icon-hamburger" src="images/01-general/hamburger-icon.svg" alt="" aria-hidden="true">
+            <img class="icon-close" src="images/01-general/close-icon.svg" alt="" aria-hidden="true">
+            <span class="visually-hidden">Menu</span>
+          </button>
+
+          <nav class="primary-navigation" id="primary-navigation">
+            <ul role="list" class="nav-list flex">
+              <li><a href="/" class="secondary-button-medium">Home</a></li>
+              <li><a href="/projects.html" class="secondary-button-medium">Projects</a></li>
+              <li><a href="/about-me.html" class="secondary-button-medium">About Me</a></li>
+              <li><a href="/Opeyemi-Adetifa-Resume.pdf" target="_blank" rel="noopener noreferrer" class="secondary-button-medium">CV</a></li>
+              <li><a href="/contact-me.html" class="primary-button-medium">Contact Me</a></li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </header>
     
@@ -59,7 +68,7 @@
             <div class="clana | project-container margin-bottom-600-72px">
               <div class="snippet-content| margin-bottom-700-96px">
                 <h2 class="heading-large fw-bold margin-bottom-300-24px">
-                  As my capstone project for my M.Sc. in Creative Digital Media & UX program, I made Clana.
+                  As the capstone project for my M.Sc. in Creative Digital Media & UX program, I made Clana.
                 </h2>
                 <p class="paragraph-small fw-regular margin-bottom-500-64px text-color-500">
                   Clana was designed to address common challenges within social groups. Challenges like forgetting significant events and tasks, difficulties when trying to coordinate schedules, and friction when trying to share memorable pictures.

@@ -1,5 +1,5 @@
 /* * {
-  border: solid 0.11px red;
+  border: solid 0.08px red;
 } */
 
 
@@ -255,6 +255,16 @@ svg {
 .margin-bottom-850-120px { margin-bottom: var(--size-850-120px); }
 .margin-bottom-900-176px { margin-bottom: var(--size-900-176px); }
 
+.visually-hidden:not(:focus):not(:active) {
+  clip: rect(0 0 0 0); 
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap; 
+  width: 1px;
+}
+
 /* GENERAL STYLING */
 html {
   color: var(--clr-neutral-300);
@@ -404,9 +414,9 @@ nav a.active {
   padding: var(--size-350-32px) var(--size-370-40px);
 }
 
-/* a {
+a {
   display: block;
-} */
+}
 
 .project-container a {
   display: block;
@@ -457,5 +467,104 @@ footer {
   
   .copyright {
     width: auto;
+  }
+}
+
+.flex {
+  display: flex;
+  gap: var(--size-300-24px);
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  /* z-index: 1000; */
+  background: rgba(0, 0, 0, 0.40);
+  box-shadow: 0px -4px 15px 0px rgba(0, 0, 0, 0.25) inset;
+  backdrop-filter: blur(28px);
+}
+
+.nav-wrapper {
+  justify-content: space-between;
+  align-items: center;
+  margin: var(--size-300-24px) 0;
+}
+
+.primary-navigation {
+  display: flex;
+}
+
+.mobile-nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.icon-close {
+  display: none;
+}
+
+@media (max-width: 53em) {
+  .mobile-nav-toggle {
+    position: relative;
+    z-index: 1001;
+  }
+
+  /* header {
+    backdrop-filter: none;
+  } */
+
+  .primary-navigation {
+    /* border: solid 0.08px red; */
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.40);
+    backdrop-filter: blur(28px);
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: center;
+    padding-inline: var(--size-300-24px);
+    padding-top: 8rem;
+    z-index: 1000;
+  }
+
+  .primary-navigation.open {
+    display: flex;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: var(--size-300-24px);
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+  }
+
+  .icon-hamburger {
+    display: block;
+  }
+
+  .icon-close {
+    display: none;
+  }
+
+  .mobile-nav-toggle[aria-expanded="true"] .icon-hamburger {
+    display: none;
+  }
+
+  .mobile-nav-toggle[aria-expanded="true"] .icon-close {
+    display: block;
+  }
+
+  .nav-wrapper > a {
+    position: relative;
+    z-index: 1001;
   }
 }

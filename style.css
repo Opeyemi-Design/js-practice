@@ -625,3 +625,9 @@ header::before {
 body.nav-open {
   overflow: hidden;
 }
+
+/* ABOUT ME PAGE */
+.about-me-linkedin a {
+  display: inline;
+  color: inherit;
+}

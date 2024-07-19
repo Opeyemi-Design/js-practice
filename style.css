@@ -332,6 +332,11 @@ body {
   background-color: var(--clr-primary-300);
 }
 
+.primary-active {
+  background-color: var(--clr-primary-400);
+  box-shadow: 2px 1px 4px 0px rgba(255, 255, 255, 0.12) inset, -3px -4px 6px 0px rgba(0, 0, 0, 0.40) inset;
+}
+
 .secondary-button-medium {
   cursor: pointer;
   text-decoration: none;
@@ -364,6 +369,11 @@ body {
 .secondary-button-large:hover,
 .secondary-button-large:focus-visible {
   background-color: var(--clr-neutral-600);
+}
+
+.secondary-active {
+  background-color: var(--clr-neutral-700);
+  box-shadow: -3px -4px 6px 0px rgba(0, 0, 0, 0.30) inset;
 }
 
 nav a.active {

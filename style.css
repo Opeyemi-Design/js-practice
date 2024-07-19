@@ -295,7 +295,7 @@ body {
 }
 
 .full-screen-height {
-  min-height: 100dvh;
+  min-height: 100vh;
 }
 
 .primary-button-medium {

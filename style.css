@@ -550,7 +550,7 @@ header::before {
     justify-content: flex-start;
     text-align: center;
     padding-inline: var(--size-300-24px);
-    padding-top: 8rem;
+    padding-top: 6rem;
     z-index: 1000;
   }
 

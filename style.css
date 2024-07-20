@@ -66,6 +66,7 @@
   --fs-display-small: clamp(1rem, calc(1rem + 1vw), 1.5rem);
   --fs-heading-large: clamp(1.25rem, calc(1.25rem + 2.5vw), 2.5rem);
   --fs-heading-small: clamp(1.125rem, calc(1.125rem + 2.25vw), 2.25rem);
+  --fs-subheading-large: clamp(1.25rem, calc(1.25rem + 1.5vw), 2rem);
   --fs-paragraph-large: clamp(1rem, calc(1rem + 1vw), 1.5rem);
   --fs-paragraph-small: clamp(0.875rem, calc(0.875rem + 0.75vw), 1.25rem);
   --fs-button-large: clamp(0.875rem, calc(0.875rem + 0.75vw), 1.25rem);
@@ -183,6 +184,7 @@ svg {
 .display-small { font-size: var(--fs-display-small); font-family: var(--ff-heading); line-height: normal; }
 .heading-large { font-size: var(--fs-heading-large); font-family: var(--ff-heading); line-height: normal; }
 .heading-small { font-size: var(--fs-heading-small); font-family: var(--ff-heading); line-height: normal; }
+.subheading-large { font-size: var(--fs-subheading-large); font-family: var(--ff-heading); line-height: normal; }
 .paragraph-large { font-size: var(--fs-paragraph-large); font-family: var(--ff-body); line-height: normal; }
 .paragraph-small { font-size: var(--fs-paragraph-small); font-family: var(--ff-body); line-height: normal; }
 .copyright-symbol { font-size: var(--fs-paragraph-small); font-family: var(--ff-copyright); line-height: normal; }
@@ -630,4 +632,34 @@ body.nav-open {
 .about-me-linkedin a {
   display: inline;
   color: inherit;
+}
+
+/* CASE STUDY PAGES */
+.media-container {
+  height: clamp(10rem, calc(10rem + ((1vw - 0.2em) * 53.0303)), 37.5rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.media-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.paragraph-and-bullet-list ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.paragraph-and-bullet-list ul li {
+  display: flex;
+  align-items: flex-start;
+}
+
+.paragraph-and-bullet-list ul li::before {
+  content: "•";
+  margin-right: 0.5em;
 }

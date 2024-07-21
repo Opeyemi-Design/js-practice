@@ -1,3 +1,4 @@
+// CONTROLS HAMBURGER MENU
 document.addEventListener('headerLoaded', () => {
     const navToggle = document.querySelector('.mobile-nav-toggle');
     const primaryNav = document.querySelector('.primary-navigation');
@@ -13,6 +14,7 @@ document.addEventListener('headerLoaded', () => {
     });
 });
 
+// COPIES EMAIL ADRRESS TO CLIPBAORD ON THE CONTACT ME PAGE
 document.addEventListener('DOMContentLoaded', function() {
     const copyButton = document.getElementById('copy-email-address');
     
@@ -36,4 +38,24 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('Failed to copy text: ', err);
       });
     });
+});
+
+// PLAYS EMBEDDED VIDEOS
+document.addEventListener('DOMContentLoaded', () => {
+  const videoContainers = document.querySelectorAll('.video-container');
+
+  videoContainers.forEach(container => {
+    container.addEventListener('click', () => {
+      const videoId = container.dataset.videoId;
+      if (videoId) {
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.allowFullscreen = true;
+
+        container.innerHTML = '';
+        container.appendChild(iframe);
+      }
+    });
+  });
 });

@@ -685,6 +685,8 @@ body.nav-open {
   margin-right: 0.5em;
 }
 
+
+/* ADD EASE IN ANIMATIONS */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }

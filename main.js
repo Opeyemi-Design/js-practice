@@ -59,3 +59,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 });
+
+//ADD EASE IN ANIMATION AFTER PAGE LOADS
+document.addEventListener('DOMContentLoaded', () => {
+  const animatedElements = document.querySelectorAll('.hidden');
+  
+  setTimeout(() => {
+    animatedElements.forEach((element, index) => {
+      setTimeout(() => {
+        element.classList.remove('hidden');
+        element.classList.add('fade-in');
+        
+        if (element.tagName === 'SECTION') {
+          element.classList.add('slide-up');
+        }
+      }, index * 200); // Stagger the animations
+    });
+  }, 100); // Small delay to ensure everything is ready
+});

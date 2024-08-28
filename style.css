@@ -1,7 +1,11 @@
 /* * {
   border: solid 0.08px red;
-} */
+}
 
+* {
+  box-sizing: border-box;
+  background: rgb(0 100 0 / 0.1) !important;
+} */
 
 /* CUSTOM FONT */
 @font-face {

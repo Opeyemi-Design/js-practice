@@ -142,7 +142,6 @@ function initWelcomeAnimation() {
   // Start the animation loop
   setTimeout(animateWelcome, 2000);
 }
-
 // Add to your existing DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', () => {
   // ... your existing code ...

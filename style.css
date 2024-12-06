@@ -516,6 +516,7 @@ header {
   background: rgba(0, 0, 0, 0.60);
   box-shadow: 0px -4px 15px 0px rgba(0, 0, 0, 0.25) inset;
   will-change: transform;
+  z-index: 1000;
 }
 
 header::before {
@@ -738,13 +739,14 @@ body.nav-open {
   height: calc(var(--fs-display-large) * 1.5);
   overflow: hidden;
   position: relative;
+  transform: translateZ(0);
+  z-index: 0;
 }
 
 .welcome-text {
   position: absolute;
   width: 100%;
 }
-
 .slide-up-out {
   animation: slideUpOut 0.5s ease-out forwards;
 }

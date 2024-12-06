@@ -77,3 +77,74 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }, 100); // Small delay to ensure everything is ready
 });
+
+// Welcome text animation
+function initWelcomeAnimation() {
+  const welcomeTexts = [
+    { text: 'WELCOME', lang: 'en' },
+    { text: 'BIENVENUE', lang: 'fr' },
+    { text: 'BIENVENIDO', lang: 'es' },
+    { text: 'BEM-VINDO', lang: 'pt' },
+    { text: 'WILLKOMMEN', lang: 'de' },
+    { text: '欢迎', lang: 'zh' },
+    { text: 'स्वागत है', lang: 'hi' },
+    { text: 'ようこそ', lang: 'ja' }
+  ];
+
+  const welcomeContainer = document.querySelector('.welcome-container');
+  let currentIndex = 0;
+
+  function createWelcomeElement(text, lang) {
+    const p = document.createElement('p');
+    p.className = 'welcome-text display-large fw-bold text-color-gradient';
+    p.textContent = text;
+    p.lang = lang;
+    return p;
+  }
+
+  async function animateWelcome() {
+    const currentElement = welcomeContainer.querySelector('.welcome-text');
+    const nextIndex = (currentIndex + 1) % welcomeTexts.length;
+    const nextElement = createWelcomeElement(welcomeTexts[nextIndex].text, welcomeTexts[nextIndex].lang);
+
+    // Position the new element at the bottom and hide it
+    nextElement.style.transform = 'translateY(100%)';
+    nextElement.style.opacity = '0';
+    welcomeContainer.appendChild(nextElement);
+
+    // Force a reflow
+    nextElement.offsetHeight;
+
+    // Wait for 2 seconds
+    await new Promise(resolve => setTimeout(resolve, 4000));
+
+    // Start animations simultaneously
+    currentElement.style.transition = 'transform 0.5s ease-out, opacity 0.5s ease-out';
+    nextElement.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.8, 1), opacity 0.8s ease-out';
+
+    // Push current element up and bring new element in
+    currentElement.style.transform = 'translateY(-100%)';
+    currentElement.style.opacity = '0';
+    nextElement.style.transform = 'translateY(0)';
+    nextElement.style.opacity = '1';
+
+    // Wait for animation to complete
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    // Clean up
+    currentElement.remove();
+    currentIndex = nextIndex;
+
+    // Schedule next animation
+    setTimeout(animateWelcome, 0);
+  }
+
+  // Start the animation loop
+  setTimeout(animateWelcome, 2000);
+}
+
+// Add to your existing DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', () => {
+  // ... your existing code ...
+  initWelcomeAnimation();
+});

@@ -748,3 +748,32 @@ body.nav-open {
 .slide-up-in {
   animation: slideUpIn 0.8s ease-out forwards;
 }
+
+/* ANIMATION UTILITY CLASSES */
+.hover-scale {
+  transition: transform 0.3s ease-in-out;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+  background-color: var(--clr-neutral-700);
+}
+
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}

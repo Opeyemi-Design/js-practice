@@ -153,3 +153,26 @@ document.addEventListener('DOMContentLoaded', () => {
   // ... your existing code ...
   initWelcomeAnimation();
 });
+
+// SCROLL REVEAL ANIMATIONS
+document.addEventListener('DOMContentLoaded', () => {
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.15
+  };
+
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        scrollObserver.unobserve(entry.target); // Stop observing once revealed
+      }
+    });
+  }, observerOptions);
+
+  // Observe elements with scroll-reveal class
+  document.querySelectorAll('.scroll-reveal, .stagger-children').forEach(element => {
+    scrollObserver.observe(element);
+  });
+});

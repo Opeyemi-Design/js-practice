@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 300); // Increased delay to ensure no conflict with welcome animation
 });
 
-// Welcome text animation
+// WELCOME TEXT ANIMATION
 function initWelcomeAnimation() {
   const welcomeTexts = [
     { text: 'WELCOME', lang: 'en' },

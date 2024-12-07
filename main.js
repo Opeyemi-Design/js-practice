@@ -64,18 +64,24 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
   const animatedElements = document.querySelectorAll('.hidden');
   
+  // Increase initial delay to allow welcome animation setup
   setTimeout(() => {
     animatedElements.forEach((element, index) => {
+      // Skip welcome-container as it has its own animation
+      if (element.classList.contains('welcome-container')) {
+        return;
+      }
+      
       setTimeout(() => {
         element.classList.remove('hidden');
         element.classList.add('fade-in');
         
-        if (element.tagName === 'SECTION') {
+        if (element.tagName === 'SECTION' || element.classList.contains('atf')) {
           element.classList.add('slide-up');
         }
-      }, index * 200); // Stagger the animations
+      }, index * 50); // Stagger the animations
     });
-  }, 100); // Small delay to ensure everything is ready
+  }, 300); // Increased delay to ensure no conflict with welcome animation
 });
 
 // Welcome text animation
@@ -115,8 +121,8 @@ function initWelcomeAnimation() {
     // Force a reflow
     nextElement.offsetHeight;
 
-    // Wait for 2 seconds
-    await new Promise(resolve => setTimeout(resolve, 4000));
+    // Wait for 3 seconds
+    await new Promise(resolve => setTimeout(resolve, 3000));
 
     // Start animations simultaneously
     currentElement.style.transition = 'transform 0.5s ease-out, opacity 0.5s ease-out';
@@ -140,7 +146,7 @@ function initWelcomeAnimation() {
   }
 
   // Start the animation loop
-  setTimeout(animateWelcome, 2000);
+  setTimeout(animateWelcome, 0);
 }
 // Add to your existing DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', () => {

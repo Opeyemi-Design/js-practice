@@ -693,41 +693,31 @@ body.nav-open {
 
 /* ADD EASE IN ANIMATIONS */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { 
+    opacity: 0; 
+  }
+  to { 
+    opacity: 1; 
+  }
 }
 
-@keyframes slideUpIn {
+@keyframes slideUp {
   0% {
-    transform: translateY(100%);
+    transform: translateY(20px);
     opacity: 0;
-  }
-  90% {
-    transform: translateY(-10%);
   }
   100% {
     transform: translateY(0);
     opacity: 1;
-  }
-}
-
-@keyframes slideUpOut {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100%);
-    opacity: 0;
   }
 }
 
 .fade-in {
-  animation: fadeIn 0.5s ease-out;
+  animation: fadeIn 0.8s ease-out forwards;
 }
 
 .slide-up {
-  animation: slideUp 0.5s ease-out;
+  animation: slideUp 0.5s ease-out forwards;
 }
 
 .hidden {

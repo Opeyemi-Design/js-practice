@@ -153,3 +153,27 @@ document.addEventListener('DOMContentLoaded', () => {
   // ... your existing code ...
   initWelcomeAnimation();
 });
+
+// SCROLL REVEAL ANIMATION
+const observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.1
+};
+
+const scrollRevealCallback = (entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+    } else {
+      entry.target.classList.remove('revealed');
+    }
+  });
+};
+
+const scrollObserver = new IntersectionObserver(scrollRevealCallback, observerOptions);
+
+document.addEventListener('DOMContentLoaded', () => {
+  const revealElements = document.querySelectorAll('.scroll-reveal');
+  revealElements.forEach(element => scrollObserver.observe(element));
+});

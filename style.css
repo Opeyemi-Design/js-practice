@@ -766,3 +766,13 @@ body.nav-open {
 .hover-lift:hover {
   transform: translateY(-4px);
 }
+
+/* SCROLL REVEAL UTILITY CLASSES */
+.scroll-reveal {
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+}

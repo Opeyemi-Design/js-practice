@@ -316,6 +316,7 @@ body {
   color: var(--clr-neutral-300);
   background-color: var(--clr-primary-200);
   box-shadow: 2px 1px 4px 0px rgba(255, 255, 255, 0.07) inset, -3px -4px 6px 0px rgba(0, 0, 0, 0.30) inset;
+  transition: transform 0.3s ease-out, background-color 0.3s ease-out;
 }
 
 .primary-button-large {
@@ -330,16 +331,19 @@ body {
   color: var(--clr-neutral-300);
   background-color: var(--clr-primary-200);
   box-shadow: 2px 1px 4px 0px rgba(255, 255, 255, 0.07) inset, -3px -4px 6px 0px rgba(0, 0, 0, 0.30) inset;
+  transition: transform 0.3s ease-out, background-color 0.3s ease-out;
 }
 
 .primary-button-medium:hover,
 .primary-button-medium:focus-visible {
   background-color: var(--clr-primary-300);
+  transform: translateY(-4px);
 }
 
 .primary-button-large:hover,
 .primary-button-large:focus-visible {
   background-color: var(--clr-primary-300);
+  transform: translateY(-4px);
 }
 
 .primary-active {
@@ -357,6 +361,7 @@ body {
   font-size: var(--fs-button-medium);
   font-weight: var(--fw-bold);
   color: var(--clr-neutral-300);
+  transition: transform 0.3s ease-out, background-color 0.3s ease-out;
 }
 
 .secondary-button-large {
@@ -369,16 +374,19 @@ body {
   font-size: var(--fs-button-large);
   font-weight: var(--fw-bold);
   color: var(--clr-neutral-300);
+  transition: transform 0.3s ease-out, background-color 0.3s ease-out;
 }
 
 .secondary-button-medium:hover,
 .secondary-button-medium:focus-visible {
   background-color: var(--clr-neutral-600);
+  transform: translateY(-4px);
 }
 
 .secondary-button-large:hover,
 .secondary-button-large:focus-visible {
   background-color: var(--clr-neutral-600);
+  transform: translateY(-4px);
 }
 
 .secondary-active {
@@ -474,11 +482,13 @@ a {
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
   cursor: pointer;
+  transition: transform 0.3s ease-out, background-color 0.3s ease-out;
 }
 
-.socials a:active,
-.socials a:hover {
+.socials a:hover,
+.socials a:focus-visible {
   background-color: var(--clr-neutral-600);
+  transform: translateY(-4px);
 }
 
 .copyright {

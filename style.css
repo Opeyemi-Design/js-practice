@@ -9,6 +9,27 @@
 
 /* CUSTOM FONT */
 @font-face {
+  font-family: 'Figtree';
+  src: url('fonts/Figtree-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Figtree';
+  src: url('fonts/Figtree-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Figtree';
+  src: url('fonts/Figtree-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Custom Sans';
   src: url('fonts/ProductSans-Regular.ttf') format('truetype');
   font-weight: 400;
@@ -55,8 +76,8 @@
 
   background-color: var(--clr-neutral-900);
 
-  --ff-primary: 'Custom Sans', sans-serif;
-  --ff-copyright: 'Syrax', sans-serif;
+  --ff-primary: 'Figtree', sans-serif;
+  --ff-copyright: 'Figtree', sans-serif;
 
   --ff-body: var(--ff-primary);
   --ff-heading: var(--ff-primary);
@@ -312,7 +333,7 @@ body {
   padding: var(--size-200-16px);
   font-family: var(--ff-primary);
   font-size: var(--fs-button-medium);
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-medium);
   color: var(--clr-neutral-300);
   background-color: var(--clr-primary-200);
   box-shadow: 2px 1px 4px 0px rgba(255, 255, 255, 0.07) inset, -3px -4px 6px 0px rgba(0, 0, 0, 0.30) inset;
@@ -327,7 +348,7 @@ body {
   padding: var(--size-300-24px);
   font-family: var(--ff-primary);
   font-size: var(--fs-button-large);
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-medium);
   color: var(--clr-neutral-300);
   background-color: var(--clr-primary-200);
   box-shadow: 2px 1px 4px 0px rgba(255, 255, 255, 0.07) inset, -3px -4px 6px 0px rgba(0, 0, 0, 0.30) inset;
@@ -359,7 +380,7 @@ body {
   padding: var(--size-200-16px);
   font-family: var(--ff-primary);
   font-size: var(--fs-button-medium);
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-medium);
   color: var(--clr-neutral-300);
   transition: transform 0.3s ease-out, background-color 0.3s ease-out;
 }
@@ -372,7 +393,7 @@ body {
   padding: var(--size-300-24px);
   font-family: var(--ff-primary);
   font-size: var(--fs-button-large);
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-medium);
   color: var(--clr-neutral-300);
   transition: transform 0.3s ease-out, background-color 0.3s ease-out;
 }
@@ -416,7 +437,7 @@ nav a.active {
   padding: var(--size-200-16px);
   font-family: var(--ff-primary);
   font-size: var(--fs-button-medium);
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-medium);
   color: var(--clr-neutral-600);
   background-color: var(--clr-neutral-500);
   box-shadow: 2px 1px 4px 0px rgba(255, 255, 255, 0.07) inset, -3px -4px 6px 0px rgba(0, 0, 0, 0.15) inset;
@@ -430,7 +451,7 @@ nav a.active {
   padding: var(--size-300-24px);
   font-family: var(--ff-primary);
   font-size: var(--fs-button-large);
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-medium);
   color: var(--clr-neutral-600);
   background-color: var(--clr-neutral-500);
   box-shadow: 2px 1px 4px 0px rgba(255, 255, 255, 0.07) inset, -3px -4px 6px 0px rgba(0, 0, 0, 0.15) inset;

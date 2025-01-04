@@ -96,6 +96,7 @@
   --fs-paragraph-small: clamp(0.875rem, calc(0.875rem + 0.75vw), 1.25rem);
   --fs-button-large: clamp(0.875rem, calc(0.875rem + 0.75vw), 1.25rem);
   --fs-button-medium: clamp(0.75rem, calc(0.75rem + 0.5vw), 1rem);
+  --fs-label: clamp(0.625rem, calc(0.625rem + 0.5vw), 0.875rem);
 
   --size-50-4px: clamp(0.2rem, calc(0.175rem + 0.125vw), 0.25rem);
   --size-100-12px: clamp(0.625rem, calc(0.5625rem + 0.3125vw), 0.75rem);
@@ -323,6 +324,30 @@ body {
 
 .full-width {
   width: 100%;
+}
+
+.label {
+  font-size: var(--fs-label);
+  font-family: var(--ff-primary);
+  font-weight: var(--fw-regular);
+  padding: var(--size-100-12px);
+  border-radius: var(--size-200-16px);
+  border: 2px solid hsla(230, 8%, 14%, 1);
+  background: hsla(0, 0%, 11%, 1);
+  box-shadow: 1px -2px 4px 0px rgba(0, 0, 0, 0.50) inset, 0px 2px 4px 0px rgba(255, 255, 255, 0.10) inset;
+}
+
+.label-wrapper {
+  display: flex;
+  gap: var(--size-100-12px);
+  padding-inline: var(--size-100-12px);
+  flex-wrap: wrap;
+}
+
+.ui-exploration-image-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-200-16px);
 }
 
 .primary-button-medium {

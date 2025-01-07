@@ -705,6 +705,11 @@ body.nav-open {
   color: hsla(198, 60%, 50%, 1);
 }
 
+.my-portfolio-heading-text {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
 /* CASE STUDY PAGES */
 .media-container {
   height: clamp(10rem, calc(10rem + ((1vw - 0.2em) * 53.0303)), 37.5rem);

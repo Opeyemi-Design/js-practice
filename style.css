@@ -696,7 +696,13 @@ body.nav-open {
 /* ABOUT ME PAGE */
 .about-me-linkedin a {
   display: inline;
-  color: inherit;
+  color: hsla(198, 60%, 50%, 1);
+}
+
+/* DEV WORK PAGE */
+.dev-work-page-link a {
+  display: inline;
+  color: hsla(198, 60%, 50%, 1);
 }
 
 /* CASE STUDY PAGES */

@@ -703,6 +703,13 @@ body.nav-open {
 .dev-work-page-link a {
   display: inline;
   color: hsla(198, 60%, 50%, 1);
+  text-decoration: none;
+}
+
+p a {
+  display: inline;
+  color: hsla(198, 60%, 50%, 1);
+  text-decoration: none;
 }
 
 .my-portfolio-heading-text {

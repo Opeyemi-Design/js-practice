@@ -287,10 +287,9 @@ function addCaseStudyNavigation() {
 
 function addPageScrollToggle() {
   const currentPath = window.location.pathname;
-  const isCompanyPage = currentPath.startsWith('/companies/');
-  const isCaseStudyDetailPage = caseStudies.some(caseStudy => caseStudy.path === currentPath);
+  const excludedPaths = ['/about-me.html', '/contact-me.html'];
 
-  if (!isCompanyPage && !isCaseStudyDetailPage) return;
+  if (excludedPaths.includes(currentPath)) return;
 
   const scrollButton = document.createElement('button');
 

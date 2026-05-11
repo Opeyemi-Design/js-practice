@@ -24,10 +24,10 @@ function highlightActiveNavLink() {
 
     navLinks.forEach(link => {
         const linkPath = link.getAttribute('href');
+        const isWorkRoute = linkPath === '/' && (currentPath === '/' || currentPath === '/index.html' || currentPath.startsWith('/companies/'));
+        const isCaseStudiesRoute = linkPath === '/case-studies.html' && (currentPath === '/case-studies.html' || currentPath.startsWith('/case-studies/'));
         
-        if (linkPath === currentPath || 
-            (currentPath === '/' && linkPath === '/index.html') || 
-            (currentPath === '/index.html' && linkPath === '/')) {
+        if (linkPath === currentPath || isWorkRoute || isCaseStudiesRoute) {
             if (link.classList.contains('primary-button-medium')) {
                 link.classList.add('primary-active');
             } else {

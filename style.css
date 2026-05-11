@@ -522,11 +522,14 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: var(--size-200-16px);
 }
 
 .company-page-navigation a {
   display: inline-flex;
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .page-scroll-toggle {
@@ -572,17 +575,15 @@ a {
 }
 
 @media (max-width: 30em) {
-  .company-page-navigation {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
   .page-scroll-toggle {
     right: var(--size-200-16px);
     bottom: var(--size-200-16px);
   }
+}
 
+@media (max-width: 20em) {
   .company-page-navigation a {
+    flex-basis: 100%;
     justify-content: center;
   }
 }
@@ -698,7 +699,7 @@ header::before {
   display: none;
 }
 
-@media (max-width: 53em) {
+@media (max-width: 72em) {
   .mobile-nav-toggle {
     position: relative;
     z-index: 1001;

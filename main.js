@@ -160,6 +160,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // CASE STUDY VISIBILITY AND PREVIOUS/NEXT NAVIGATION
 const caseStudies = [
   {
+    title: 'Creative Insights',
+    slug: 'creative-insights',
+    path: '/case-studies/creative-insights.html',
+    isVisible: true
+  },
+  {
     title: 'Creative Hub',
     slug: 'creative-hub',
     path: '/case-studies/creative-hub.html',

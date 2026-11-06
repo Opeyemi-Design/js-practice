@@ -1,0 +1,433 @@
+/* Shared interactive controls. Variants: filled, outline, ghost; sizes: small, medium, large. */
+.btn {
+  --btn-bg: transparent;
+  --btn-fg: var(--text);
+  --btn-border: transparent;
+  --btn-pressed-bg: transparent;
+  --btn-pressed-fg: var(--button-neutral-pressed-text);
+  --btn-pressed-border: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--size-90-10px);
+  border: 1.5px solid var(--btn-border);
+  border-radius: var(--size-pill);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  box-shadow: none;
+  text-decoration: none;
+  font-family: inherit;
+  font-weight: var(--type-body-weight);
+  line-height: var(--lh-control);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+  transform: none;
+}
+
+.btn--filled {
+  --btn-bg: var(--accent);
+  --btn-fg: var(--on-accent);
+  --btn-pressed-bg: var(--button-filled-pressed-surface);
+  --btn-pressed-fg: var(--button-filled-pressed-text);
+}
+
+.btn--outline {
+  --btn-border: var(--text);
+  --btn-pressed-border: var(--button-neutral-pressed-text);
+}
+
+.btn--ghost {
+  --btn-bg: transparent;
+}
+
+/* Shared button sizes */
+.btn--small {
+  min-height: 2.5rem;
+  padding: var(--size-90-10px) var(--size-225-18px);
+  font-size: var(--fs-body-small);
+}
+
+.btn--medium {
+  min-height: 3rem;
+  padding: var(--size-100-12px) var(--size-300-24px);
+  font-size: var(--fs-body-medium);
+}
+
+.btn--large {
+  min-height: 3.5rem;
+  padding: var(--size-200-16px) var(--size-350-32px);
+  font-size: var(--fs-body-large);
+}
+
+.btn--icon {
+  padding: var(--size-0-0px);
+  aspect-ratio: 1;
+}
+
+.btn--icon.btn--small {
+  width: 2.5rem;
+}
+
+.btn--icon.btn--medium {
+  width: 3rem;
+}
+
+.btn--icon.btn--large {
+  width: 3.5rem;
+}
+
+.btn__icon {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+
+.btn--filled:hover {
+  background: var(--button-filled-hover-surface);
+  color: var(--button-filled-hover-text);
+  box-shadow: none;
+  transform: none;
+}
+
+.btn--outline:hover,
+.btn--ghost:hover {
+  --btn-pressed-bg: var(--button-neutral-hover-pressed-surface);
+  background: var(--surface-soft);
+  color: var(--text);
+  transform: none;
+}
+
+.btn:active,
+.btn[aria-pressed='true'] {
+  background: var(--btn-pressed-bg);
+  color: var(--btn-pressed-fg);
+  border-color: var(--btn-pressed-border);
+}
+
+/* Neutral disabled colours stay readable without fading the whole control. */
+.btn:disabled,
+.btn[aria-disabled='true'] {
+  background: transparent;
+  border-color: transparent;
+  color: var(--disabled-text);
+  opacity: 1;
+  cursor: not-allowed;
+  pointer-events: none;
+  filter: none;
+}
+
+.btn--filled:disabled,
+.btn--filled[aria-disabled='true'] {
+  background: var(--disabled-surface);
+}
+
+.btn--outline:disabled,
+.btn--outline[aria-disabled='true'] {
+  border-color: var(--disabled-border);
+}
+
+.btn:focus-visible,
+.segmented-control button:focus-visible {
+  outline: 3px solid var(--accent-deep);
+  outline-offset: 3px;
+}
+
+/* Focus rings followed the old whole-button filter, so retain those colours. */
+.btn--filled:hover:focus-visible {
+  outline-color: var(--button-filled-hover-focus);
+}
+
+.btn:active:focus-visible,
+.btn[aria-pressed='true']:focus-visible {
+  outline-color: var(--button-pressed-focus);
+}
+
+.segmented-control .btn:focus-visible {
+  outline-color: var(--accent-deep);
+}
+
+/* Reusable tooltip for controls with a data-tooltip label. */
+.tooltip {
+  position: fixed;
+  z-index: 200;
+  width: max-content;
+  max-width: min(20rem, calc(100vw - 1rem));
+  padding: var(--size-75-8px) var(--size-100-12px);
+  border: 1px solid var(--line);
+  border-radius: var(--size-90-10px);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  color: var(--text);
+  font-family: var(--ff-primary);
+  font-size: var(--fs-body-small);
+  line-height: var(--lh-control);
+  overflow-wrap: anywhere;
+}
+
+.tooltip[hidden] {
+  display: none;
+}
+
+/* Temporary season switcher for reviewing the themes. */
+.season-preview {
+  position: fixed;
+  z-index: 120;
+  bottom: var(--size-240-20px);
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: var(--size-200-16px);
+  max-width: calc(100vw - 2rem);
+  padding: var(--size-90-10px) var(--size-100-12px);
+  border: 1px solid var(--line);
+  border-radius: var(--size-200-16px);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  color: var(--text);
+  font-size: var(--fs-body-small);
+  transform: translateX(-50%);
+}
+
+.season-preview[hidden] {
+  display: none;
+}
+
+.season-preview label {
+  white-space: nowrap;
+}
+
+.season-preview__select {
+  position: relative;
+  min-width: 0;
+}
+
+.season-preview select {
+  min-width: 0;
+  max-width: 100%;
+  padding: var(--size-75-8px) var(--size-370-40px) var(--size-75-8px) var(--size-100-12px);
+  border: 1px solid var(--line);
+  border-radius: var(--size-90-10px);
+  appearance: none;
+  background: var(--surface-soft);
+  color: var(--text);
+  font: inherit;
+}
+
+.season-preview__select svg {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.season-preview select:focus-visible {
+  outline: 3px solid var(--accent-deep);
+  outline-offset: 2px;
+}
+
+/* Non-interactive labels for categories and other short metadata. */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-65-6px);
+  padding: var(--size-75-8px) var(--size-100-12px);
+  border: 1px solid var(--line);
+  border-radius: var(--size-pill);
+  background: var(--surface-soft);
+  color: var(--accent-deep);
+  font-family: inherit;
+  font-size: var(--fs-body-small);
+  font-weight: var(--type-body-weight);
+  line-height: var(--lh-control);
+}
+
+.badge-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-100-12px);
+}
+
+/* Theme selector and its sliding active indicator */
+.segmented-control {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-25-2px);
+  padding: var(--size-50-4px);
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--size-pill);
+}
+
+.segmented-control button {
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border: 0;
+  border-radius: var(--size-pill);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.segmented-control button:hover {
+  background: var(--glass);
+  color: var(--text);
+}
+
+.segmented-control button[aria-pressed='true'] {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-segment);
+}
+
+.segmented-control .btn--icon {
+  width: 2.1rem;
+  height: 2.1rem;
+  min-height: 0;
+  padding: var(--size-0-0px);
+}
+
+/* Preserve the translucent segment's existing pressed compositing. */
+.segmented-control .btn:active:not([aria-pressed='true']):not(:disabled):not([aria-disabled='true']) {
+  filter: brightness(0.87);
+}
+
+.segmented-control {
+  position: relative;
+  isolation: isolate;
+}
+
+.segmented-control button {
+  position: relative;
+  z-index: 1;
+}
+
+.segmented-control .segment-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: var(--size-pill);
+  background: var(--surface);
+  box-shadow: var(--shadow-segment);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .segmented-control .segment-indicator.is-sliding {
+    transition:
+      transform 0.35s ease,
+      width 0.35s ease,
+      height 0.35s ease;
+  }
+}
+
+.segmented-control.has-segment-indicator .segment-indicator {
+  opacity: 1;
+}
+
+.segmented-control.has-segment-indicator button[aria-pressed='true'],
+.theme-switcher.segmented-control.has-segment-indicator button[aria-pressed='true'] {
+  background: transparent;
+  box-shadow: none;
+}
+
+.mobile-nav-toggle.btn {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .mobile-nav-toggle.btn {
+    display: flex;
+  }
+}
+
+/* Navigation links share the same pill treatment wherever they are used. */
+.nav-link,
+.primary-navigation .nav-list a {
+  display: block;
+  padding: var(--size-100-12px) var(--size-225-18px);
+  border-radius: var(--size-pill);
+  color: var(--text);
+  font-size: var(--fs-body-small);
+  font-weight: var(--type-body-weight);
+  line-height: var(--lh-navigation);
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 0.35s ease-in-out,
+    color 0.35s ease-in-out;
+}
+
+.nav-link:hover,
+.primary-navigation .nav-list a:hover {
+  background: var(--surface-soft);
+}
+
+.nav-link[aria-current='page'],
+.primary-navigation .nav-list a[aria-current='page'] {
+  background: var(--surface-soft);
+  background: color-mix(in srgb, var(--text) 16%, var(--surface));
+}
+
+.nav-link[aria-current='page']:hover,
+.primary-navigation .nav-list a[aria-current='page']:hover {
+  background: var(--surface-soft);
+}
+
+.nav-link:active,
+.primary-navigation .nav-list a:active {
+  filter: brightness(0.93);
+}
+
+.nav-link:focus-visible,
+.primary-navigation .nav-list a:focus-visible {
+  outline: 3px solid var(--accent-deep);
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .nav-link,
+  .primary-navigation .nav-list a {
+    padding: var(--size-100-12px) var(--size-225-18px);
+    font-size: var(--fs-body-large);
+  }
+}
+
+@media (max-width: 480px) {
+  .segmented-control .btn--icon {
+    width: 1.85rem;
+    height: 1.85rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .segmented-control button,
+  .segmented-control .segment-indicator,
+  .nav-link,
+  .primary-navigation .nav-list a {
+    transition: none;
+  }
+}

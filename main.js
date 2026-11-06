@@ -1,248 +1,186 @@
-// CONTROLS HAMBURGER MENU
+// Mobile navigation
 document.addEventListener('headerLoaded', () => {
-    const navToggle = document.querySelector('.mobile-nav-toggle');
-    const primaryNav = document.querySelector('.primary-navigation');
-    const body = document.body;
-  
-    navToggle.addEventListener('click', () => {
-      const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-      navToggle.setAttribute('aria-expanded', !isExpanded);
-      primaryNav.classList.toggle('open');
-      
-      // Toggle the 'nav-open' class on the body
-      body.classList.toggle('nav-open');
-    });
+  const navToggle = document.querySelector('.mobile-nav-toggle');
+  const primaryNav = document.querySelector('.primary-navigation');
+  const body = document.body;
+
+  navToggle.addEventListener('click', () => {
+    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+    navToggle.setAttribute('aria-expanded', !isExpanded);
+    primaryNav.classList.toggle('open');
+
+    // Toggle the 'nav-open' class on the body
+    body.classList.toggle('nav-open');
+    navToggle.setAttribute('aria-label', isExpanded ? 'Open menu' : 'Close menu');
+  });
+  primaryNav.addEventListener('click', (event) => {
+    if (!event.target.closest('a')) return;
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Open menu');
+    primaryNav.classList.remove('open');
+    body.classList.remove('nav-open');
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || navToggle.getAttribute('aria-expanded') !== 'true') return;
+    navToggle.click();
+    navToggle.focus();
+  });
 });
 
-// COPIES EMAIL ADRRESS TO CLIPBAORD ON THE CONTACT ME PAGE
-document.addEventListener('DOMContentLoaded', function() {
-    const copyButton = document.getElementById('copy-email-address');
-    const copyButtonLabel = copyButton?.querySelector('.copy-button-label');
+// Copy the contact email address
+function setupCopyEmailButton() {
+  const copyButton = document.getElementById('copy-email-address');
+  const copyButtonLabel = copyButton?.querySelector('.copy-button-label');
+  const copyStatus = document.querySelector('.copy-status');
 
-    if (!copyButton || !copyButtonLabel) return;
-    
-    copyButton.addEventListener('click', function() {
-      const email = this.getAttribute('data-email');
-      
-      // Copy email to clipboard
-      navigator.clipboard.writeText(email).then(function() {
-        // Change button text and style
-        copyButtonLabel.textContent = 'Email Address Copied';
-        copyButton.style.backgroundColor = 'var(--clr-neutral-500)';
-        copyButton.style.color = 'var(--clr-neutral-600)';
-        
-        // Optionally, revert the button after a few seconds
-        setTimeout(function() {
-          copyButtonLabel.textContent = 'Copy Email Address';
-          copyButton.style.backgroundColor = '';
-          copyButton.style.color = '';
-        }, 4000); // Revert after 3 seconds
-      }).catch(function(err) {
-        console.error('Failed to copy text: ', err);
-      });
-    });
-});
+  if (!copyButton || !copyButtonLabel) return;
 
-// PLAYS EMBEDDED VIDEOS
-document.addEventListener('DOMContentLoaded', () => {
+  copyButton.addEventListener('click', async function () {
+    const email = this.getAttribute('data-email');
+    copyButton.disabled = true;
+
+    try {
+      await navigator.clipboard.writeText(email);
+
+      // Keep the confirmation visible and the button disabled for four seconds.
+      copyButtonLabel.textContent = 'Email address copied';
+      if (copyStatus) copyStatus.textContent = 'Email address copied to clipboard.';
+
+      setTimeout(function () {
+        copyButtonLabel.textContent = 'Copy email address';
+        copyButton.disabled = false;
+        if (copyStatus) copyStatus.textContent = '';
+      }, 4000);
+    } catch (err) {
+      copyButton.disabled = false;
+      console.error('Failed to copy text: ', err);
+      if (copyStatus)
+        copyStatus.textContent = 'Could not copy the address. You can use the email link instead.';
+    }
+  });
+}
+
+// Load project videos when their previews are activated.
+function setupProjectVideos() {
   const videoContainers = document.querySelectorAll('.video-container');
 
-  videoContainers.forEach(container => {
-    container.addEventListener('click', () => {
+  videoContainers.forEach((container) => {
+    container.setAttribute('role', 'button');
+    container.setAttribute('tabindex', '0');
+    container.setAttribute('aria-label', 'Play video');
+    const playVideo = () => {
       const videoId = container.dataset.videoId;
       if (videoId) {
         const iframe = document.createElement('iframe');
-        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+        iframe.src = `https://www.youtube.com/embed/${encodeURIComponent(videoId.split('?')[0])}?autoplay=1`;
+        iframe.title = 'Project video';
+        iframe.allow =
+          'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
         iframe.allowFullscreen = true;
 
         container.innerHTML = '';
         container.appendChild(iframe);
+        container.removeAttribute('role');
+        container.removeAttribute('tabindex');
+        container.removeAttribute('aria-label');
+      }
+    };
+    container.addEventListener('click', playVideo, { once: true });
+    container.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        playVideo();
       }
     });
   });
-});
-
-//ADD EASE IN ANIMATION AFTER PAGE LOADS
-document.addEventListener('DOMContentLoaded', () => {
-  const animatedElements = document.querySelectorAll('.hidden');
-  
-  // Increase initial delay to allow welcome animation setup
-  setTimeout(() => {
-    animatedElements.forEach((element, index) => {
-      // Skip welcome-container as it has its own animation
-      if (element.classList.contains('welcome-container')) {
-        return;
-      }
-      
-      setTimeout(() => {
-        element.classList.remove('hidden');
-        element.classList.add('fade-in');
-        
-        if (element.tagName === 'SECTION' || element.classList.contains('atf')) {
-          element.classList.add('slide-up');
-        }
-      }, index * 50); // Stagger the animations
-    });
-  }, 300); // Increased delay to ensure no conflict with welcome animation
-});
-
-// WELCOME TEXT ANIMATION
-function initWelcomeAnimation() {
-  const welcomeTexts = [
-    { text: 'WELCOME', lang: 'en' },
-    { text: 'BIENVENUE', lang: 'fr' },
-    { text: 'BIENVENIDO', lang: 'es' },
-    { text: 'BEM-VINDO', lang: 'pt' },
-    { text: 'WILLKOMMEN', lang: 'de' },
-    { text: '欢迎', lang: 'zh' },
-    { text: 'स्वागत है', lang: 'hi' },
-    { text: 'ようこそ', lang: 'ja' }
-  ];
-
-  const welcomeContainer = document.querySelector('.welcome-container');
-  let currentIndex = 0;
-
-  function createWelcomeElement(text, lang) {
-    const p = document.createElement('p');
-    p.className = 'welcome-text display-large fw-medium text-color-gradient';
-    p.textContent = text;
-    p.lang = lang;
-    return p;
-  }
-
-  async function animateWelcome() {
-    const currentElement = welcomeContainer.querySelector('.welcome-text');
-    const nextIndex = (currentIndex + 1) % welcomeTexts.length;
-    const nextElement = createWelcomeElement(welcomeTexts[nextIndex].text, welcomeTexts[nextIndex].lang);
-
-    // Position the new element at the bottom and hide it
-    nextElement.style.transform = 'translateY(100%)';
-    nextElement.style.opacity = '0';
-    welcomeContainer.appendChild(nextElement);
-
-    // Force a reflow
-    nextElement.offsetHeight;
-
-    // Wait for 3 seconds
-    await new Promise(resolve => setTimeout(resolve, 3000));
-
-    // Start animations simultaneously
-    currentElement.style.transition = 'transform 0.5s ease-out, opacity 0.5s ease-out';
-    nextElement.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.8, 1), opacity 0.8s ease-out';
-
-    // Push current element up and bring new element in
-    currentElement.style.transform = 'translateY(-100%)';
-    currentElement.style.opacity = '0';
-    nextElement.style.transform = 'translateY(0)';
-    nextElement.style.opacity = '1';
-
-    // Wait for animation to complete
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    // Clean up
-    currentElement.remove();
-    currentIndex = nextIndex;
-
-    // Schedule next animation
-    setTimeout(animateWelcome, 0);
-  }
-
-  // Start the animation loop
-  setTimeout(animateWelcome, 0);
 }
-// Add to your existing DOMContentLoaded event listener
-document.addEventListener('DOMContentLoaded', () => {
-  // ... your existing code ...
-  initWelcomeAnimation();
-});
 
-// CASE STUDY VISIBILITY AND PREVIOUS/NEXT NAVIGATION
+// Case study visibility and previous/next navigation
 const caseStudies = [
   {
     title: 'Creative Insights',
     slug: 'creative-insights',
     path: '/case-studies/creative-insights.html',
-    isVisible: true
+    isVisible: true,
   },
   {
     title: 'Creative Hub',
     slug: 'creative-hub',
     path: '/case-studies/creative-hub.html',
-    isVisible: true
+    isVisible: true,
   },
   {
     title: 'Scheduled Designs',
     slug: 'scheduled-designs',
     path: '/case-studies/scheduled-designs.html',
-    isVisible: true
+    isVisible: true,
   },
   {
     title: 'AfroTada Redesign',
     slug: 'afrotada-redesign',
     path: '/case-studies/afrotada-redesign.html',
-    isVisible: true
+    isVisible: true,
   },
   {
     title: 'AfroTada Dashboard',
     slug: 'afrotada-dashboard',
     path: '/case-studies/afrotada-dashboard.html',
-    isVisible: true
+    isVisible: true,
   },
   {
     title: 'Clana',
     slug: 'clana',
     path: '/case-studies/clana.html',
-    isVisible: true
+    isVisible: true,
   },
   {
     title: 'YouTube In-App Sharing',
     slug: 'youtube-in-app-sharing',
     path: '/case-studies/youtube-in-app-sharing.html',
-    isVisible: true
+    isVisible: true,
   },
   {
     title: 'RentSpot',
     slug: 'rentspot',
     path: '/case-studies/rentspot.html',
-    isVisible: true
+    isVisible: true,
   },
   {
     title: 'Harvey Norman App',
     slug: 'harvey-norman-shopping-app',
     path: '/case-studies/harvey-norman-shopping-app.html',
-    isVisible: false
+    isVisible: false,
   },
   {
     title: 'TheeZign',
     slug: 'theezign',
     path: '/case-studies/theezign.html',
-    isVisible: false
-  }
+    isVisible: false,
+  },
 ];
 
 const leftArrowIcon = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/></svg>
+  <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 12H5m7-7-7 7 7 7"/></svg>
 `;
 
 const rightArrowIcon = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path fill="currentColor" fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/></svg>
+  <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
 `;
 
 const scrollDownIcon = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" fill-rule="evenodd"><path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M12.707 15.707a1 1 0 0 1-1.414 0L5.636 10.05A1 1 0 1 1 7.05 8.636l4.95 4.95l4.95-4.95a1 1 0 0 1 1.414 1.414z"/></g></svg>
+  <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v14m-7-7 7 7 7-7"/></svg>
 `;
 
 const scrollUpIcon = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><g fill="none" fill-rule="evenodd"><path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M11.293 8.293a1 1 0 0 1 1.414 0l5.657 5.657a1 1 0 0 1-1.414 1.414L12 10.414l-4.95 4.95a1 1 0 0 1-1.414-1.414z"/></g></svg>
+  <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 19V5m-7 7 7-7 7 7"/></svg>
 `;
 
 function updateCaseStudyCards() {
   const caseStudyCards = document.querySelectorAll('[data-case-study-slug]');
   const projectsContainer = document.querySelector('.projects');
 
-  caseStudyCards.forEach(card => {
-    const caseStudy = caseStudies.find(item => item.slug === card.dataset.caseStudySlug);
+  caseStudyCards.forEach((card) => {
+    const caseStudy = caseStudies.find((item) => item.slug === card.dataset.caseStudySlug);
 
     if (!caseStudy) return;
 
@@ -251,7 +189,7 @@ function updateCaseStudyCards() {
 
   if (!projectsContainer || caseStudyCards.length === 0) return;
 
-  caseStudies.forEach(caseStudy => {
+  caseStudies.forEach((caseStudy) => {
     const card = projectsContainer.querySelector(`[data-case-study-slug="${caseStudy.slug}"]`);
 
     if (!card) return;
@@ -262,13 +200,14 @@ function updateCaseStudyCards() {
 
 function addCaseStudyNavigation() {
   const currentPath = window.location.pathname;
-  const visibleCaseStudies = caseStudies.filter(caseStudy => caseStudy.isVisible);
-  const currentIndex = visibleCaseStudies.findIndex(caseStudy => caseStudy.path === currentPath);
+  const visibleCaseStudies = caseStudies.filter((caseStudy) => caseStudy.isVisible);
+  const currentIndex = visibleCaseStudies.findIndex((caseStudy) => caseStudy.path === currentPath);
   const main = document.querySelector('main');
 
   if (!main || currentIndex === -1) return;
 
-  const previousCaseStudy = visibleCaseStudies[(currentIndex - 1 + visibleCaseStudies.length) % visibleCaseStudies.length];
+  const previousCaseStudy =
+    visibleCaseStudies[(currentIndex - 1 + visibleCaseStudies.length) % visibleCaseStudies.length];
   const nextCaseStudy = visibleCaseStudies[(currentIndex + 1) % visibleCaseStudies.length];
   const navigationSection = document.createElement('section');
 
@@ -276,11 +215,11 @@ function addCaseStudyNavigation() {
   navigationSection.innerHTML = `
     <div class="normal-container">
       <div class="company-page-navigation">
-        <a href="${previousCaseStudy.path}" class="secondary-button-medium inline-icon-button hover-lift scroll-reveal">
+        <a href="${previousCaseStudy.path}" class="btn btn--outline btn--medium">
           ${leftArrowIcon}
           ${previousCaseStudy.title}
         </a>
-        <a href="${nextCaseStudy.path}" class="secondary-button-medium inline-icon-button hover-lift scroll-reveal">
+        <a href="${nextCaseStudy.path}" class="btn btn--outline btn--medium">
           ${nextCaseStudy.title}
           ${rightArrowIcon}
         </a>
@@ -291,21 +230,21 @@ function addCaseStudyNavigation() {
   main.appendChild(navigationSection);
 }
 
+let removePageScrollToggle = () => {};
+
 function addPageScrollToggle() {
   const currentPath = window.location.pathname;
-  const excludedPaths = ['/about-me.html', '/contact-me.html'];
-
-  if (excludedPaths.includes(currentPath)) return;
+  if (!currentPath.startsWith('/companies/') && !currentPath.startsWith('/case-studies/')) return;
 
   const scrollButton = document.createElement('button');
 
   scrollButton.type = 'button';
-  scrollButton.className = 'page-scroll-toggle';
+  scrollButton.className = 'btn btn--outline btn--icon btn--large page-scroll-toggle';
   document.body.appendChild(scrollButton);
 
   function updateScrollButton() {
     const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const isNearBottom = scrollableHeight > 0 && window.scrollY > scrollableHeight * 0.8;
+    const isNearBottom = scrollableHeight > 0 && window.scrollY > scrollableHeight * 0.4;
 
     scrollButton.dataset.scrollDirection = isNearBottom ? 'up' : 'down';
     scrollButton.setAttribute('aria-label', isNearBottom ? 'Scroll to top' : 'Scroll to bottom');
@@ -317,41 +256,368 @@ function addPageScrollToggle() {
 
     window.scrollTo({
       top: isScrollToTop ? 0 : document.documentElement.scrollHeight,
-      behavior: 'smooth'
+      behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
     });
   });
 
   window.addEventListener('scroll', updateScrollButton, { passive: true });
   window.addEventListener('resize', updateScrollButton);
+  removePageScrollToggle = () => {
+    window.removeEventListener('scroll', updateScrollButton);
+    window.removeEventListener('resize', updateScrollButton);
+    scrollButton.remove();
+    removePageScrollToggle = () => {};
+  };
   updateScrollButton();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+function addHeroScroll() {
+  const link = document.querySelector('.hero-scroll');
+  const target = document.getElementById('work');
+  if (!link || !target) return;
+
+  let cancelScroll = () => {};
+  document.addEventListener('portfolio:before-navigate', () => cancelScroll(), { once: true });
+  link.addEventListener('click', (event) => {
+    if (
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      matchMedia('(prefers-reduced-motion: reduce)').matches
+    )
+      return;
+
+    event.preventDefault();
+    cancelScroll();
+    if (location.hash !== '#work') history.pushState(null, '', '#work');
+
+    const start = window.scrollY;
+    const offset = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    const destination = Math.max(0, target.getBoundingClientRect().top + start - offset);
+    const duration = 1400;
+    let frame;
+    let started;
+    const stop = () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('wheel', stop);
+      window.removeEventListener('touchstart', stop);
+      window.removeEventListener('keydown', stop);
+      cancelScroll = () => {};
+    };
+    cancelScroll = stop;
+    window.addEventListener('wheel', stop, { passive: true });
+    window.addEventListener('touchstart', stop, { passive: true });
+    window.addEventListener('keydown', stop);
+
+    const animate = (time) => {
+      if (started === undefined) started = time;
+      const progress = Math.min((time - started) / duration, 1);
+      const eased = progress < 0.5 ? 4 * progress ** 3 : 1 - (-2 * progress + 2) ** 3 / 2;
+      window.scrollTo({ top: start + (destination - start) * eased, behavior: 'instant' });
+      if (progress < 1) {
+        frame = requestAnimationFrame(animate);
+      } else {
+        stop();
+        const hadTabindex = target.hasAttribute('tabindex');
+        if (!hadTabindex) target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+        if (!hadTabindex)
+          target.addEventListener('blur', () => target.removeAttribute('tabindex'), { once: true });
+      }
+    };
+    frame = requestAnimationFrame(animate);
+  });
+}
+
+function setupPage() {
+  setupCopyEmailButton();
+  setupProjectVideos();
   updateCaseStudyCards();
   addCaseStudyNavigation();
   addPageScrollToggle();
-});
+  addHeroScroll();
+}
 
-// SCROLL REVEAL ANIMATION
-const observerOptions = {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.1
-};
+document.addEventListener('DOMContentLoaded', setupPage);
+document.addEventListener('portfolio:navigated', setupPage);
+document.addEventListener('portfolio:before-navigate', () => removePageScrollToggle());
 
-const scrollRevealCallback = (entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('revealed');
-    } else {
-      entry.target.classList.remove('revealed');
+// Replace internal page content while keeping the shared header mounted.
+function setupSiteNavigation() {
+  // Both homepage URLs refer to the same page, even when one includes index.html.
+  const pageKey = (url) =>
+    `${url.pathname === '/index.html' ? '/' : url.pathname}${url.search}`;
+  let displayedPage = pageKey(new URL(location.href));
+  let pendingNavigation;
+  let scrollSaveTimer;
+
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+  function saveScrollPosition() {
+    const state = { ...history.state, portfolioScrollY: window.scrollY };
+    history.replaceState(state, '', location.href);
+  }
+
+  function restorePosition(url, savedPosition) {
+    if (typeof savedPosition === 'number') {
+      window.scrollTo({ top: savedPosition, behavior: 'instant' });
+      return;
     }
+    const target = url.hash && document.getElementById(decodeURIComponent(url.hash.slice(1)));
+    if (target) {
+      const offset = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+      window.scrollTo({
+        top: Math.max(0, target.getBoundingClientRect().top + window.scrollY - offset),
+        behavior: 'instant',
+      });
+      return;
+    }
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+
+  async function navigate(url, { addHistory = true, savedPosition } = {}) {
+    pendingNavigation?.abort();
+    const controller = new AbortController();
+    pendingNavigation = controller;
+
+    try {
+      const response = await fetch(url.pathname + url.search, { signal: controller.signal });
+      if (!response.ok) throw new Error(`Could not load page: ${response.status}`);
+      const nextDocument = new DOMParser().parseFromString(await response.text(), 'text/html');
+      const nextMain = nextDocument.querySelector('main');
+      const currentMain = document.querySelector('main');
+      if (!nextMain || !currentMain) throw new Error('Page content is unavailable');
+      if (controller.signal.aborted) return;
+
+      if (addHistory) {
+        clearTimeout(scrollSaveTimer);
+        saveScrollPosition();
+        history.pushState({ portfolioScrollY: 0 }, '', url.href);
+      }
+
+      document.dispatchEvent(new Event('portfolio:before-navigate'));
+      document.body.className = nextDocument.body.className;
+      document.title = nextDocument.title;
+      currentMain.replaceWith(nextMain);
+      displayedPage = pageKey(url);
+      document.dispatchEvent(new Event('portfolio:navigated'));
+      restorePosition(url, savedPosition);
+
+      // Announce the new page to keyboard and screen-reader users.
+      nextMain.setAttribute('tabindex', '-1');
+      nextMain.focus({ preventScroll: true });
+    } catch (error) {
+      if (error.name !== 'AbortError') location.assign(url.href);
+    } finally {
+      if (pendingNavigation === controller) pendingNavigation = null;
+    }
+  }
+
+  document.addEventListener('click', (event) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    )
+      return;
+    const link = event.target.closest('a[href]');
+    if (!link || link.hasAttribute('download') || (link.target && link.target !== '_self')) return;
+    const url = new URL(link.href, location.href);
+    if (url.origin !== location.origin) return;
+    if (url.pathname !== '/' && !url.pathname.endsWith('.html')) return;
+
+    // Let ordinary in-page links retain their native scrolling behavior.
+    const isHeaderLink = Boolean(link.closest('.primary-header'));
+    if (
+      !isHeaderLink &&
+      url.hash &&
+      url.pathname === location.pathname &&
+      url.search === location.search
+    )
+      return;
+
+    const menuToggle = document.querySelector('.mobile-nav-toggle[aria-expanded="true"]');
+    if (menuToggle) menuToggle.click();
+    if (pageKey(url) === displayedPage) {
+      pendingNavigation?.abort();
+      event.preventDefault();
+      if (url.href !== location.href) {
+        clearTimeout(scrollSaveTimer);
+        saveScrollPosition();
+        history.pushState({ portfolioScrollY: 0 }, '', url.href);
+      }
+      restorePosition(url);
+      return;
+    }
+    event.preventDefault();
+    navigate(url);
   });
-};
 
-const scrollObserver = new IntersectionObserver(scrollRevealCallback, observerOptions);
+  window.addEventListener(
+    'scroll',
+    () => {
+      clearTimeout(scrollSaveTimer);
+      scrollSaveTimer = setTimeout(saveScrollPosition, 150);
+    },
+    { passive: true },
+  );
 
-document.addEventListener('DOMContentLoaded', () => {
-  const revealElements = document.querySelectorAll('.scroll-reveal');
-  revealElements.forEach(element => scrollObserver.observe(element));
-});
+  window.addEventListener('popstate', (event) => {
+    clearTimeout(scrollSaveTimer);
+    const url = new URL(location.href);
+    if (pageKey(url) === displayedPage) {
+      pendingNavigation?.abort();
+      restorePosition(url, event.state?.portfolioScrollY);
+      return;
+    }
+    navigate(url, { addHistory: false, savedPosition: event.state?.portfolioScrollY });
+  });
+
+  // A browser back navigation can return through a normal, full-page link.
+  if (typeof history.state?.portfolioScrollY === 'number') {
+    requestAnimationFrame(() => restorePosition(new URL(location.href), history.state.portfolioScrollY));
+  }
+}
+
+document.addEventListener('DOMContentLoaded', setupSiteNavigation);
+
+// Keep the native page scrolling while drawing a transparent-track overlay thumb.
+function setupPageScrollbar() {
+  const root = document.documentElement;
+  const overlaySupport = matchMedia('(pointer: fine) and (forced-colors: none)');
+  const scrollbar = document.createElement('div');
+  const thumb = document.createElement('div');
+  let updateFrame;
+  let fadeTimer;
+  let dragOffset = 0;
+  let draggingPointer = null;
+
+  if (!root.id) root.id = 'page-scroll-region';
+  scrollbar.className = 'page-scrollbar';
+  scrollbar.hidden = true;
+  scrollbar.tabIndex = 0;
+  scrollbar.setAttribute('role', 'scrollbar');
+  scrollbar.setAttribute('aria-label', 'Page scrollbar');
+  scrollbar.setAttribute('aria-controls', root.id);
+  scrollbar.setAttribute('aria-orientation', 'vertical');
+  scrollbar.setAttribute('aria-valuemin', '0');
+  scrollbar.setAttribute('aria-valuemax', '100');
+  thumb.className = 'page-scrollbar__thumb';
+  scrollbar.appendChild(thumb);
+  document.body.appendChild(scrollbar);
+
+  // Reveal the thumb on activity and start the three-second idle countdown.
+  function showScrollbar() {
+    if (scrollbar.hidden) return;
+    scrollbar.classList.add('is-visible');
+    clearTimeout(fadeTimer);
+    fadeTimer = setTimeout(() => scrollbar.classList.remove('is-visible'), 3000);
+  }
+
+  function updateScrollbar() {
+    updateFrame = null;
+    if (!overlaySupport.matches) {
+      root.classList.remove('has-overlay-scrollbar');
+      scrollbar.hidden = true;
+      clearTimeout(fadeTimer);
+      scrollbar.classList.remove('is-visible');
+      return;
+    }
+
+    root.classList.add('has-overlay-scrollbar');
+    const scrollableHeight = Math.max(0, root.scrollHeight - window.innerHeight);
+    const wasHidden = scrollbar.hidden;
+    scrollbar.hidden = scrollableHeight <= 1;
+    if (scrollbar.hidden) {
+      clearTimeout(fadeTimer);
+      scrollbar.classList.remove('is-visible');
+      return;
+    }
+    if (wasHidden) showScrollbar();
+
+    const trackHeight = scrollbar.clientHeight;
+    const thumbHeight = Math.max(40, (trackHeight * window.innerHeight) / root.scrollHeight);
+    const progress = Math.max(0, Math.min(1, window.scrollY / scrollableHeight));
+    thumb.style.height = `${Math.min(trackHeight, thumbHeight)}px`;
+    thumb.style.transform = `translateY(${progress * Math.max(0, trackHeight - thumbHeight)}px)`;
+    scrollbar.setAttribute('aria-valuenow', String(Math.round(progress * 100)));
+  }
+
+  function scheduleUpdate() {
+    if (updateFrame === undefined || updateFrame === null) {
+      updateFrame = requestAnimationFrame(updateScrollbar);
+    }
+  }
+
+  function scrollFromPointer(clientY) {
+    const track = scrollbar.getBoundingClientRect();
+    const travel = track.height - thumb.getBoundingClientRect().height;
+    if (travel <= 0) return;
+    const position = Math.max(0, Math.min(travel, clientY - track.top - dragOffset));
+    const scrollableHeight = Math.max(0, root.scrollHeight - window.innerHeight);
+    window.scrollTo({ top: (position / travel) * scrollableHeight, behavior: 'instant' });
+  }
+
+  scrollbar.addEventListener('pointerdown', (event) => {
+    if (event.button !== 0) return;
+    event.preventDefault();
+    const thumbRect = thumb.getBoundingClientRect();
+    dragOffset = event.target === thumb ? event.clientY - thumbRect.top : thumbRect.height / 2;
+    draggingPointer = event.pointerId;
+    scrollbar.classList.add('is-dragging');
+    showScrollbar();
+    scrollbar.setPointerCapture(event.pointerId);
+    scrollbar.focus({ preventScroll: true });
+    scrollFromPointer(event.clientY);
+  });
+
+  scrollbar.addEventListener('pointermove', (event) => {
+    if (event.pointerId === draggingPointer) scrollFromPointer(event.clientY);
+  });
+
+  scrollbar.addEventListener('lostpointercapture', () => {
+    draggingPointer = null;
+    scrollbar.classList.remove('is-dragging');
+    showScrollbar();
+  });
+
+  scrollbar.addEventListener('pointerenter', showScrollbar);
+  scrollbar.addEventListener('focus', showScrollbar);
+
+  scrollbar.addEventListener('keydown', (event) => {
+    const pageStep = window.innerHeight * 0.9;
+    const scrollableHeight = Math.max(0, root.scrollHeight - window.innerHeight);
+    const positions = {
+      ArrowUp: window.scrollY - 40,
+      ArrowDown: window.scrollY + 40,
+      PageUp: window.scrollY - pageStep,
+      PageDown: window.scrollY + pageStep,
+      Home: 0,
+      End: scrollableHeight,
+    };
+    if (!(event.key in positions)) return;
+    event.preventDefault();
+    window.scrollTo({ top: positions[event.key], behavior: 'instant' });
+  });
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      showScrollbar();
+      scheduleUpdate();
+    },
+    { passive: true },
+  );
+  window.addEventListener('resize', scheduleUpdate);
+  document.addEventListener('portfolio:navigated', scheduleUpdate);
+  overlaySupport.addEventListener('change', scheduleUpdate);
+  if ('ResizeObserver' in window) new ResizeObserver(scheduleUpdate).observe(document.body);
+  updateScrollbar();
+}
+
+document.addEventListener('DOMContentLoaded', setupPageScrollbar);

@@ -2,149 +2,171 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/images/01-general/opeyemi-favicon-gradient.svg" />
+    <link rel="icon" type="image/svg+xml" href="/images/01-general/opeyemi-favicon-face.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Opeyemi Adetifa</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/foundation.css" />
+    <link rel="stylesheet" href="/redesign.css" />
+    <link rel="stylesheet" href="/components.css" />
+    <link rel="stylesheet" href="/pages.css" />
+    <script src="/theme.js"></script>
     <script src="/header-and-footer-loader.js"></script>
 
     <!-- Open Graph meta tags -->
-    <meta property="og:title" content="Opeyemi Adetifa's Design Portfolio">
-    <meta property="og:description" content="A product designer with 7 years of experience across e-commerce, ad tech, cybersecurity, and online media publishing.">
-    <meta property="og:image" content="https://opeyemiadetifa.com/images/01-general/link-thumnail.png">
-    <meta property="og:url" content="https://opeyemiadetifa.com">
-    <meta property="og:type" content="website">
+    <meta property="og:title" content="Opeyemi Adetifa's Design Portfolio" />
+    <meta
+      property="og:description"
+      content="A product designer with 7 years of experience across e-commerce, ad tech, cybersecurity, and online media publishing."
+    />
+    <meta
+      property="og:image"
+      content="https://opeyemiadetifa.com/images/01-general/link-thumnail.png"
+    />
+    <meta property="og:url" content="https://opeyemiadetifa.com" />
+    <meta property="og:type" content="website" />
   </head>
 
-  <body>
-    <main class="margin-bottom-800-104px">
-      <section class="atf | margin-top-900-176px hidden">
-        <div class="normal-container">
-          <div class="atf-headings | margin-bottom-600-72px">
-            <div class="welcome-container | margin-bottom-400-48px">
-              <p class="welcome-text display-large fw-medium text-color-gradient scroll-reveal">
-                WELCOME
-              </p>
-            </div>
-            <p class="display-medium fw-medium scroll-reveal">
-              I'm <span class="text-color-gradient">Opeyemi (Oh-pay-yeah-me),</span> a Product Designer and Design Engineer with 7 years of experience across e-commerce, ad tech, cybersecurity, and online media publishing.
-            </p>
-          </div>
+  <body class="home-page">
+    <main>
+      <!-- Introduction -->
+      <section class="home-hero">
+        <div class="normal-container hero-content">
+          <p class="badge hero-eyebrow">Product designer &amp; design engineer</p>
+          <h1 class="hero-heading">Turning complex ideas into easy to use products.</h1>
+          <p class="hero-intro">
+            I’m Opeyemi (Oh-pay-yeah-me), a product designer and design engineer with 7 years of
+            experience across e-commerce, ad tech, cybersecurity and online media publishing.
+          </p>
+          <a class="btn btn--outline btn--large hero-scroll" href="#work"
+            >Scroll to explore my work
+            <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5v14m-7-7 7 7 7-7" /></svg
+          ></a>
         </div>
       </section>
 
-      <section class="projects-section hidden">
+      <!-- Company previews -->
+      <section class="projects-section" id="work">
         <div class="normal-container">
-          <div class="margin-bottom-400-48px hidden">
-            <p class="display-medium fw-regular scroll-reveal">
-              Here's an overview of my work so far.
-            </p>
+          <div>
+            <h2 class="section-title">My work across different industries</h2>
           </div>
 
           <div class="projects">
-            <div class="wayfair | project-container margin-bottom-600-72px hover-scale">
-              <div class="snippet-content| margin-bottom-700-96px">
-                <div class="label-wrapper margin-bottom-300-24px scroll-reveal">
-                  <p class="label">E-commerce</p>
+            <div class="wayfair project-container">
+              <div class="snippet-content">
+                <div class="summary-copy">
+                  <div class="badge-group">
+                    <p class="badge">E-commerce and logistics</p>
+                  </div>
+                  <h2>Wayfair</h2>
+                  <p>
+                    I led product design for Inventory and Replenishment, creating tools that help
+                    suppliers plan and manage stock.
+                  </p>
+                  <p>Supporting more than 11,000 suppliers with forecasting and replenishment.</p>
+                  <a href="/companies/wayfair.html" class="btn btn--filled btn--large"
+                    >See projects</a
+                  >
                 </div>
-                <h2 class="heading-large fw-bold margin-bottom-300-24px scroll-reveal">
-                  Wayfair
-                </h2>
-
-                <div class="normal-image margin-bottom-500-64px scroll-reveal">
-                  <img src="images/work/wayfair.png" alt="Wayfair work preview">
+                <div class="normal-image">
+                  <img src="images/work/wayfair.png" alt="Wayfair work preview" decoding="async" />
                 </div>
-
-                <p class="paragraph-small fw-regular margin-bottom-100-12px text-color-500 scroll-reveal">
-                  I was the Lead Product Designer on the Inventory and Replenishment team. Inventory refers to the items a company has in stock to sell, think of it as the goods in a store's backroom or warehouse. Replenishment is the process of ensuring there's enough stock to meet customer demand.
-                </p>
-                <p class="paragraph-small fw-regular margin-bottom-100-12px text-color-500 scroll-reveal">
-                  My work focused on designing tools that help over 11,000 suppliers keep goods in stock, forecast future sales, and replenish just enough inventory to meet that forecast.
-                </p>
               </div>
-
-              <a href="/companies/wayfair.html" class="primary-button-large hover-lift">See Projects</a>
             </div>
 
-            <div class="kargo | project-container margin-bottom-600-72px hover-scale">
-              <div class="snippet-content| margin-bottom-700-96px">
-                <div class="label-wrapper margin-bottom-300-24px scroll-reveal">
-                  <p class="label">Ad tech</p>
+            <div class="kargo project-container">
+              <div class="snippet-content">
+                <div class="summary-copy">
+                  <div class="badge-group">
+                    <p class="badge">Ad tech</p>
+                  </div>
+                  <h2>Kargo</h2>
+                  <p>
+                    I led design across Creative Tech and Creative Solutions, building tools for
+                    teams to create and manage advertising.
+                  </p>
+                  <p></p>
+                  <p>
+                    Tools I've worked on are used to create over 100,000 unique ad designs monthly.
+                  </p>
+                  <a href="/companies/kargo.html" class="btn btn--filled btn--large"
+                    >See projects</a
+                  >
                 </div>
-                <h2 class="heading-large fw-bold margin-bottom-300-24px scroll-reveal">
-                  Kargo
-                </h2>
-
-                <div class="normal-image margin-bottom-500-64px scroll-reveal">
-                  <img src="images/work/kargo.png" alt="Kargo work preview">
+                <div class="normal-image">
+                  <img
+                    src="images/work/kargo.png"
+                    alt="Kargo work preview"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
-
-                <p class="paragraph-small fw-regular margin-bottom-100-12px text-color-500 scroll-reveal">
-                  I led design on the Creative Tech and Creative Solutions teams.
-                </p>
-                <p class="paragraph-small fw-regular margin-bottom-100-12px text-color-500 scroll-reveal">
-                  My work focused on designing creative tools and products used by internal teams and external clients to create ad designs for ad campaigns across social media platforms, the open web, and CTV (Connected TV).
-                </p>
-                <p class="paragraph-small fw-regular margin-bottom-100-12px text-color-500 scroll-reveal">
-                  Tools I've worked on are used to create over 100,000 unique ad designs monthly.
-                </p>
               </div>
-
-              <a href="/companies/kargo.html" class="primary-button-large hover-lift">See Projects</a>
             </div>
 
-            <div class="vikingcloud | project-container margin-bottom-600-72px hover-scale">
-              <div class="snippet-content| margin-bottom-700-96px">
-                <div class="label-wrapper margin-bottom-300-24px scroll-reveal">
-                  <p class="label">Cybersecurity tech</p>
+            <div class="vikingcloud project-container">
+              <div class="snippet-content">
+                <div class="summary-copy">
+                  <div class="badge-group">
+                    <p class="badge">Cybersecurity tech</p>
+                  </div>
+                  <h2>VikingCloud</h2>
+                  <p>
+                    I led design on the VikingCloud Platform, creating cybersecurity and compliance
+                    tools for organisations of all sizes.
+                  </p>
+                  <p>
+                    The tools I've worked on are used by over 4 million businesses across 70+
+                    countries.
+                  </p>
+                  <a href="/companies/vikingcloud.html" class="btn btn--filled btn--large"
+                    >See projects</a
+                  >
                 </div>
-                <h2 class="heading-large fw-bold margin-bottom-300-24px scroll-reveal">
-                  VikingCloud
-                </h2>
-
-                <div class="normal-image margin-bottom-500-64px scroll-reveal">
-                  <img src="images/work/vikingcloud.png" alt="VikingCloud work preview">
+                <div class="normal-image">
+                  <img
+                    src="images/work/vikingcloud.png"
+                    alt="VikingCloud work preview"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
-
-                <p class="paragraph-small fw-regular margin-bottom-100-12px text-color-500 scroll-reveal">
-                  I was one of the Lead Designers on the VikingCloud Platform (VCP) team. My work focused on designing cybersecurity and compliance solutions for large organisations with extensive security needs, as well as simple, all-in-one solutions for small and medium enterprises.
-                </p>
-                <p class="paragraph-small fw-regular margin-bottom-100-12px text-color-500 scroll-reveal">
-                  The tools I've worked on are used by over 4 million businesses across 70+ countries.
-                </p>
               </div>
-
-              <a href="/companies/vikingcloud.html" class="primary-button-large hover-lift">See Projects</a>
             </div>
 
-            <div class="afrotada | project-container margin-bottom-600-72px hover-scale">
-              <div class="snippet-content| margin-bottom-700-96px">
-                <div class="label-wrapper margin-bottom-300-24px scroll-reveal">
-                  <p class="label">Online media publishing</p>
+            <div class="afrotada project-container">
+              <div class="snippet-content">
+                <div class="summary-copy">
+                  <div class="badge-group">
+                    <p class="badge">Online media publishing</p>
+                  </div>
+                  <h2>AfroTada</h2>
+                  <p>
+                    I owned end-to-end design across AfroTada’s reader experience and the tools used
+                    to publish and manage content.
+                  </p>
+                  <p></p>
+                  <a href="/companies/afrotada.html" class="btn btn--filled btn--large"
+                    >See projects</a
+                  >
                 </div>
-                <h2 class="heading-large fw-bold margin-bottom-300-24px scroll-reveal">
-                  AfroTada
-                </h2>
-
-                <div class="normal-image margin-bottom-500-64px scroll-reveal">
-                  <img src="images/work/afrotada.png" alt="AfroTada work preview">
+                <div class="normal-image">
+                  <img
+                    src="images/work/afrotada.png"
+                    alt="AfroTada work preview"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
-
-                <p class="paragraph-small fw-regular margin-bottom-100-12px text-color-500 scroll-reveal">
-                  I owned end-to-end design across two areas: the reader-facing platform where audiences discover and read content, and the contributor, editor, and admin platforms where writers submit articles and the AfroTada team manages publishing.
-                </p>
-                <p class="paragraph-small fw-regular margin-bottom-100-12px text-color-500 scroll-reveal">
-                  My work covered both halves of the business: designing the experience that drew readers in, and designing the tools that let contributors publish and the team manage everything behind the scenes.
-                </p>
               </div>
-
-              <a href="/companies/afrotada.html" class="primary-button-large hover-lift">See Projects</a>
             </div>
           </div>
         </div>
       </section>
     </main>
 
+    <script src="/ambience.js"></script>
     <script type="module" src="/main.js"></script>
   </body>
 </html>

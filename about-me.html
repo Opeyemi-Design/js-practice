@@ -2,70 +2,70 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/images/01-general/opeyemi-favicon-gradient.svg" />
+    <link rel="icon" type="image/svg+xml" href="/images/01-general/opeyemi-favicon-face.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Opeyemi Adetifa</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/foundation.css" />
+    <link rel="stylesheet" href="/redesign.css" />
+    <link rel="stylesheet" href="/components.css" />
+    <link rel="stylesheet" href="/pages.css" />
+    <script src="/theme.js"></script>
     <script src="/header-and-footer-loader.js"></script>
 
     <!-- Open Graph meta tags -->
-    <meta property="og:title" content="Opeyemi Adetifa's Design Portfolio">
-    <meta property="og:description" content="A product designer with 7 years of experience across e-commerce, ad tech, cybersecurity, and online media publishing.">
-    <meta property="og:image" content="https://opeyemiadetifa.com/images/01-general/link-thumnail.png">
-    <meta property="og:url" content="https://opeyemiadetifa.com">
-    <meta property="og:type" content="website">
+    <meta property="og:title" content="Opeyemi Adetifa's Design Portfolio" />
+    <meta
+      property="og:description"
+      content="A product designer with 7 years of experience across e-commerce, ad tech, cybersecurity, and online media publishing."
+    />
+    <meta
+      property="og:image"
+      content="https://opeyemiadetifa.com/images/01-general/link-thumnail.png"
+    />
+    <meta property="og:url" content="https://opeyemiadetifa.com" />
+    <meta property="og:type" content="website" />
   </head>
 
-  <body>
-    <main class="margin-bottom-800-104px">
-      <section class="atf | margin-top-900-176px margin-bottom-850-120px hidden">
-        <div class="normal-container">
-          <div class="atf-headings | margin-bottom-600-72px">
-            <p class="display-medium fw-medium text-color-gradient margin-bottom-400-48px scroll-reveal">
-              WELCOME TO MY PORTFOLIO!
-            </p>
-            <p class="display-medium fw-medium scroll-reveal">
-              I'm <span class="text-color-gradient">Opeyemi (Oh-pay-yeah-me),</span> a Product Designer and Design Engineer with 7 years of experience across e-commerce, ad tech, cybersecurity, and online media publishing.
-            </p>
-          </div>
-
-          <div class="atf-paragraphs">
-            <p class="display-small fw-regular text-color-500 margin-bottom-200-16px scroll-reveal">
-              I’m a designer first, but I also love bringing some of my ideas to life in code. I used to primarily use CSS, Javascript/TypeScript and React for this, but with the rise of LLMs, you can build and prototype just about anything in any language.
-            </p>
-            <p class="display-small fw-regular text-color-500 scroll-reveal">
-              I’m very enthusiastic about tech. I enjoy a wide variety of music from local Nigerian music to Afrobeats, Pop, EDM, Classical etc. My taste is varied.
-            </p>
-          </div>
-        </div>
+  <body class="about-page">
+    <main class="page-main">
+      <section class="page-hero normal-container">
+        <p class="page-eyebrow">About</p>
+        <h1 class="page-heading">Hi, I’m Opeyemi.</h1>
+        <p class="page-intro">
+          A product designer and design engineer with 7 years of experience across e-commerce, ad
+          tech, cybersecurity and online media publishing.
+        </p>
       </section>
-
-      <section class="two-truths-and-a-lie">
-        <div class="normal-container">
-          <div class="two-truths-and-a-lie-heading | margin-bottom-400-48px hidden">
-            <p class="display-medium fw-regular scroll-reveal">
-              TWO TRUTHS AND A LIE
-            </p>
-          </div>
-
-          <div class="two-truths-and-a-lie-paragraphs">
-            <p class="display-small fw-regular text-color-500 margin-bottom-200-16px scroll-reveal">
-              One, I've never had an headache or migraine. 
-            </p>
-            <p class="display-small fw-regular text-color-500 margin-bottom-200-16px scroll-reveal">
-              Two, I once lived in a forest for 7 days.
-            </p>
-            <p class="display-small fw-regular text-color-500 margin-bottom-400-48px scroll-reveal">
-              Three, I was bitten by a dog which gave me a huge scar on my lap when I was younger and now I have an irrational fear of dogs. 
-            </p>
-            <p class="display-medium fw-regular text-color-gradient scroll-reveal">
-              TAKE A GUESS! 
-            </p>
-          </div>
-        </div>
-      </section>
+      <div class="normal-container personal-grid">
+        <section class="personal-card">
+          <h2>A little about me</h2>
+          <p>
+            I’m a designer first, but I also love bringing ideas to life in code. I’ve used CSS,
+            JavaScript, TypeScript and React to build and prototype my work. With the rise of LLMs,
+            it’s possible to build and prototype in many more languages too.
+          </p>
+          <p>
+            I’m enthusiastic about technology and enjoy a wide variety of music, from Nigerian music
+            and Afrobeats to pop, EDM and classical.
+          </p>
+          <a class="btn btn--filled btn--medium" href="/contact-me.html">Get in touch</a>
+        </section>
+        <section class="personal-card">
+          <h2>Two truths and a lie</h2>
+          <p>Here are three things about me. One of them isn’t true.</p>
+          <ol>
+            <li>I’ve never had a headache or migraine.</li>
+            <li>I once lived in a forest for 7 days.</li>
+            <li>
+              I was bitten by a dog when I was younger, leaving a large scar on my lap, and now have
+              an irrational fear of dogs.
+            </li>
+          </ol>
+          <p>Take a guess!</p>
+        </section>
+      </div>
     </main>
-
+    <script src="/ambience.js"></script>
     <script type="module" src="/main.js"></script>
   </body>
 </html>

@@ -256,9 +256,14 @@ main img {
   margin-block: var(--size-600-40px) var(--size-200-16px);
 }
 
+.case-page .case-body .case-impact h3,
+.case-page .case-body .case-subsections h3 {
+  font-size: var(--fs-header-small);
+}
+
 .case-page .case-body p,
 .case-page .case-body li {
-  font-size: var(--fs-body-large);
+  font-size: var(--fs-body-medium);
   font-weight: var(--type-body-weight);
   line-height: var(--lh-body);
   color: var(--muted);
@@ -266,6 +271,10 @@ main img {
 
 .case-page .case-body p + p {
   margin-top: var(--size-200-16px);
+}
+
+.case-page .case-body .case-role {
+  color: var(--text);
 }
 
 .case-page .case-body p.case-lead {
@@ -467,7 +476,7 @@ main img {
 }
 
 .listing-page .page-hero .page-heading {
-  margin-bottom: var(--size-0-0px);
+  margin-block: var(--size-0-0px);
 }
 
 .home-hero + .projects-section {
@@ -521,6 +530,23 @@ main img {
   .case-page .case-body > .normal-container > div > :nth-child(2) {
     grid-column: 2;
     grid-row: 1;
+  }
+
+  /* Let the takeaway and its content flow independently of the section heading. */
+  .case-page .case-body > .normal-container > div:has(> h2.case-section-heading:first-child + .case-lead) {
+    position: relative;
+  }
+
+  .case-page .case-body > .normal-container > div > h2.case-section-heading:first-child:has(+ .case-lead) {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: 0;
+    grid-column: 1 / 2;
+    grid-row: 1 / -1;
+  }
+
+  .case-page .case-body > .normal-container > div > h2.case-section-heading:first-child + p.case-lead {
+    margin-bottom: calc(var(--size-400-24px) - var(--size-200-16px));
   }
 
   .case-page

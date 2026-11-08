@@ -3,7 +3,7 @@
 :root {
   --fs-display-small: clamp(1.6rem, calc(1.2rem + 1.5vw), 2.65rem);
   --fs-display-medium: clamp(2.2rem, calc(1.5rem + 2.1vw), 4rem);
-  --fs-display-large: clamp(2.8rem, calc(1.8rem + 4.5vw), 7rem);
+  --fs-display-large: clamp(2.8rem, calc(1.8rem + 4.5vw), 6rem);
   --fs-header-small: clamp(1.125rem, calc(1.05rem + 0.3vw), 1.5rem);
   --fs-header-medium: clamp(1.25rem, calc(1.1rem + 0.7vw), 2rem);
   --fs-header-large: clamp(1.5rem, calc(1.25rem + 1vw), 2.5rem);
@@ -13,7 +13,6 @@
 
   --fw-light: 300;
   --fw-regular: 400;
-  --fw-medium: 500;
   --fw-semibold: 600;
   --fw-bold: 700;
   --type-display-weight: var(--fw-bold);

@@ -46,19 +46,19 @@
 /* Shared button sizes */
 .btn--small {
   min-height: 2.5rem;
-  padding: var(--size-90-10px) var(--size-225-18px);
+  padding: var(--size-90-10px) var(--size-300-20px);
   font-size: var(--fs-body-small);
 }
 
 .btn--medium {
   min-height: 3rem;
-  padding: var(--size-100-12px) var(--size-300-24px);
+  padding: var(--size-100-12px) var(--size-400-24px);
   font-size: var(--fs-body-medium);
 }
 
 .btn--large {
   min-height: 3.5rem;
-  padding: var(--size-200-16px) var(--size-350-32px);
+  padding: var(--size-200-16px) var(--size-500-32px);
   font-size: var(--fs-body-large);
 }
 
@@ -180,7 +180,7 @@
 .season-preview {
   position: fixed;
   z-index: 120;
-  bottom: var(--size-240-20px);
+  bottom: var(--size-300-20px);
   left: 50%;
   display: flex;
   align-items: center;
@@ -212,7 +212,7 @@
 .season-preview select {
   min-width: 0;
   max-width: 100%;
-  padding: var(--size-75-8px) var(--size-370-40px) var(--size-75-8px) var(--size-100-12px);
+  padding: var(--size-75-8px) var(--size-600-40px) var(--size-75-8px) var(--size-100-12px);
   border: 1px solid var(--line);
   border-radius: var(--size-90-10px);
   appearance: none;
@@ -367,7 +367,7 @@
 .nav-link,
 .primary-navigation .nav-list a {
   display: block;
-  padding: var(--size-100-12px) var(--size-225-18px);
+  padding: var(--size-100-12px) var(--size-300-20px);
   border-radius: var(--size-pill);
   color: var(--text);
   font-size: var(--fs-body-small);
@@ -410,7 +410,7 @@
 @media (max-width: 900px) {
   .nav-link,
   .primary-navigation .nav-list a {
-    padding: var(--size-100-12px) var(--size-225-18px);
+    padding: var(--size-100-12px) var(--size-300-20px);
     font-size: var(--fs-body-large);
   }
 }

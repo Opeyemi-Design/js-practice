@@ -1,6 +1,6 @@
 /* Page layouts use the same type, colour and spacing tokens as the components. */
 .page-main {
-  padding-block: var(--size-895-176px) var(--size-700-96px);
+  padding-block: var(--size-1700-176px) var(--size-1200-96px);
 }
 
 .page-heading {
@@ -41,15 +41,15 @@
 }
 
 .page-stack > * + * {
-  margin-top: var(--size-300-24px);
+  margin-top: var(--size-400-24px);
 }
 
 .page-hero {
-  margin-bottom: var(--size-700-96px);
+  margin-bottom: var(--size-1200-96px);
 }
 
 .page-hero .page-heading {
-  margin-block: var(--size-300-24px);
+  margin-block: var(--size-400-24px);
 }
 
 /* Keep portfolio images consistently, subtly rounded. */
@@ -66,17 +66,17 @@ main img {
 
 .page-hero > .normal-container + .normal-container,
 .page-hero > .normal-container + .wide-container {
-  margin-top: var(--size-500-64px);
+  margin-top: var(--size-900-64px);
 }
 
 .page-main .projects {
   display: grid;
-  gap: var(--size-370-40px);
+  gap: var(--size-600-40px);
 }
 
 .home-page .projects {
   display: grid;
-  gap: var(--size-370-40px);
+  gap: var(--size-600-40px);
 }
 
 .home-page .section-title {
@@ -100,7 +100,7 @@ main img {
   font-size: var(--fs-header-large);
   font-weight: var(--type-header-weight);
   line-height: var(--lh-heading);
-  margin-bottom: var(--size-370-40px);
+  margin-bottom: var(--size-600-40px);
 }
 
 .page-main p a:not(.btn) {
@@ -112,7 +112,7 @@ main img {
 .page-main .normal-image,
 .page-main .video-container,
 .page-main .media-container {
-  margin-block: var(--size-370-40px);
+  margin-block: var(--size-600-40px);
 }
 
 .page-main .video-container {
@@ -138,7 +138,7 @@ main img {
 }
 
 .page-main ul:not([role]) {
-  padding-left: var(--size-300-24px);
+  padding-left: var(--size-400-24px);
 }
 
 .page-main li + li {
@@ -148,7 +148,7 @@ main img {
 /* Company pages: concise, grouped project information and full-width imagery. */
 .company-page .atf-headings {
   display: grid;
-  gap: var(--size-300-24px);
+  gap: var(--size-400-24px);
 }
 
 .company-page .atf-headings > p {
@@ -156,19 +156,19 @@ main img {
 }
 
 .company-page .atf-headings > .normal-image {
-  margin-block: var(--size-300-24px);
+  margin-block: var(--size-400-24px);
 }
 
 .company-page .projects-section {
-  margin-top: var(--size-700-96px);
+  margin-top: var(--size-1200-96px);
 }
 
 .company-page .projects .project-container {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: var(--size-355-35px);
+  border-radius: var(--size-500-32px);
   box-shadow: var(--shadow);
-  padding: var(--size-390-48px);
+  padding: var(--size-700-48px);
   margin: var(--size-0-0px);
 }
 
@@ -179,12 +179,12 @@ main img {
 .company-page .project-container .snippet-content {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--size-370-40px);
+  gap: var(--size-600-40px);
   margin: var(--size-0-0px);
 }
 
 .company-page .project-container .snippet-content + .btn {
-  margin-top: var(--size-370-40px);
+  margin-top: var(--size-600-40px);
 }
 
 .company-page .project-container .snippet-content > h2 {
@@ -233,7 +233,7 @@ main img {
 
 .case-page .case-body > .normal-container > div {
   display: flow-root;
-  padding-block: var(--size-500-64px);
+  padding-block: var(--size-900-64px);
   border-top: 1px solid var(--line);
 }
 
@@ -245,7 +245,7 @@ main img {
   font-size: var(--fs-header-large);
   font-weight: var(--type-header-weight);
   line-height: var(--lh-heading);
-  margin-bottom: var(--size-300-24px);
+  margin-bottom: var(--size-400-24px);
   text-wrap: balance;
 }
 
@@ -253,7 +253,7 @@ main img {
   font-size: var(--fs-header-medium);
   font-weight: var(--type-header-weight);
   line-height: var(--lh-heading);
-  margin-block: var(--size-370-40px) var(--size-200-16px);
+  margin-block: var(--size-600-40px) var(--size-200-16px);
 }
 
 .case-page .case-body p,
@@ -273,7 +273,7 @@ main img {
   font-size: var(--fs-header-small);
   font-weight: var(--type-header-weight);
   line-height: var(--lh-heading);
-  margin-bottom: var(--size-300-24px);
+  margin-bottom: var(--size-400-24px);
 }
 
 .case-page .case-body .case-label {
@@ -301,7 +301,7 @@ main img {
 
 .company-page-navigation-section,
 .case-study-page-navigation-section {
-  margin-top: var(--size-700-96px);
+  margin-top: var(--size-1200-96px);
 }
 
 .page-scroll-toggle.btn {
@@ -315,15 +315,15 @@ main img {
 .personal-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--size-370-40px);
+  gap: var(--size-600-40px);
   align-items: stretch;
 }
 
 .personal-card {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: var(--size-355-35px);
-  padding: var(--size-390-48px);
+  border-radius: var(--size-500-32px);
+  padding: var(--size-700-48px);
   box-shadow: var(--shadow);
 }
 
@@ -342,15 +342,15 @@ main img {
 }
 
 .personal-card > * + * {
-  margin-top: var(--size-300-24px);
+  margin-top: var(--size-400-24px);
 }
 
 .personal-card ol {
-  padding-left: var(--size-300-24px);
+  padding-left: var(--size-400-24px);
 }
 
 .personal-card .btn {
-  margin-top: var(--size-370-40px);
+  margin-top: var(--size-600-40px);
 }
 
 .personal-card p a {
@@ -372,7 +372,7 @@ main img {
 .gallery-page .design-explorations {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--size-370-40px);
+  gap: var(--size-600-40px);
   align-items: start;
 }
 
@@ -413,7 +413,7 @@ main img {
 }
 
 .coding-page .project-container > * + * {
-  margin-top: var(--size-300-24px);
+  margin-top: var(--size-400-24px);
 }
 
 .coding-page .paragraph-and-bullet-list > * + * {
@@ -433,11 +433,11 @@ main img {
 }
 
 .project-details ul {
-  margin-top: var(--size-300-24px);
+  margin-top: var(--size-400-24px);
 }
 
 .exploration-collection {
-  margin-top: var(--size-700-96px);
+  margin-top: var(--size-1200-96px);
   scroll-margin-top: 7rem;
 }
 
@@ -446,7 +446,7 @@ main img {
 }
 
 .collection-heading {
-  margin-bottom: var(--size-370-40px);
+  margin-bottom: var(--size-600-40px);
 }
 
 .collection-heading .section-title {
@@ -459,7 +459,7 @@ main img {
 
 .explorations-page .exploration-collection .projects {
   display: grid;
-  gap: var(--size-370-40px);
+  gap: var(--size-600-40px);
 }
 
 .explorations-page .coding-page .project-container {
@@ -471,11 +471,11 @@ main img {
 }
 
 .home-hero + .projects-section {
-  padding-bottom: var(--size-700-96px);
+  padding-bottom: var(--size-1200-96px);
 }
 
 .home-hero + .projects-section .section-title {
-  margin-bottom: var(--size-370-40px);
+  margin-bottom: var(--size-600-40px);
 }
 
 .badge-group {
@@ -503,7 +503,7 @@ main img {
   .case-page .case-body > .normal-container > div {
     display: grid;
     grid-template-columns: minmax(11rem, 0.33fr) minmax(0, 1fr);
-    column-gap: var(--size-500-64px);
+    column-gap: var(--size-900-64px);
     row-gap: var(--size-200-16px);
     align-items: start;
   }
@@ -529,7 +529,7 @@ main img {
     > div
     > :is(.normal-image, .media-container, .video-container) {
     grid-column: 1 / -1;
-    margin-block: var(--size-300-24px);
+    margin-block: var(--size-400-24px);
   }
 
   .case-page .case-body > .normal-container > div > h2.case-section-heading:first-child {

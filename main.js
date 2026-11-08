@@ -3,6 +3,14 @@ document.addEventListener('headerLoaded', () => {
   const navToggle = document.querySelector('.mobile-nav-toggle');
   const primaryNav = document.querySelector('.primary-navigation');
   const body = document.body;
+  const mobileLayout = matchMedia('(max-width: 900px)');
+
+  // Keep the closed mobile menu out of keyboard navigation as it animates.
+  function updateNavigationAvailability() {
+    primaryNav.inert = mobileLayout.matches && navToggle.getAttribute('aria-expanded') !== 'true';
+  }
+  updateNavigationAvailability();
+  mobileLayout.addEventListener('change', updateNavigationAvailability);
 
   navToggle.addEventListener('click', () => {
     const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
@@ -12,6 +20,7 @@ document.addEventListener('headerLoaded', () => {
     // Toggle the 'nav-open' class on the body
     body.classList.toggle('nav-open');
     navToggle.setAttribute('aria-label', isExpanded ? 'Open menu' : 'Close menu');
+    updateNavigationAvailability();
   });
   primaryNav.addEventListener('click', (event) => {
     if (!event.target.closest('a')) return;
@@ -19,6 +28,7 @@ document.addEventListener('headerLoaded', () => {
     navToggle.setAttribute('aria-label', 'Open menu');
     primaryNav.classList.remove('open');
     body.classList.remove('nav-open');
+    updateNavigationAvailability();
   });
   document.addEventListener('keydown', (event) => {
     if (event.key !== 'Escape' || navToggle.getAttribute('aria-expanded') !== 'true') return;
@@ -271,63 +281,67 @@ function addPageScrollToggle() {
   updateScrollButton();
 }
 
-function addHeroScroll() {
-  const link = document.querySelector('.hero-scroll');
-  const target = document.getElementById('work');
-  if (!link || !target) return;
+function addSectionScroll() {
+  const links = document.querySelectorAll('.hero-scroll, [data-smooth-scroll]');
+  if (links.length === 0) return;
 
   let cancelScroll = () => {};
   document.addEventListener('portfolio:before-navigate', () => cancelScroll(), { once: true });
-  link.addEventListener('click', (event) => {
-    if (
-      event.button !== 0 ||
-      event.metaKey ||
-      event.ctrlKey ||
-      event.shiftKey ||
-      event.altKey ||
-      matchMedia('(prefers-reduced-motion: reduce)').matches
-    )
-      return;
+  links.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const target = document.getElementById(link.hash.slice(1));
+      if (!target) return;
 
-    event.preventDefault();
-    cancelScroll();
-    if (location.hash !== '#work') history.pushState(null, '', '#work');
+      if (
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey ||
+        matchMedia('(prefers-reduced-motion: reduce)').matches
+      )
+        return;
 
-    const start = window.scrollY;
-    const offset = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
-    const destination = Math.max(0, target.getBoundingClientRect().top + start - offset);
-    const duration = 1400;
-    let frame;
-    let started;
-    const stop = () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener('wheel', stop);
-      window.removeEventListener('touchstart', stop);
-      window.removeEventListener('keydown', stop);
-      cancelScroll = () => {};
-    };
-    cancelScroll = stop;
-    window.addEventListener('wheel', stop, { passive: true });
-    window.addEventListener('touchstart', stop, { passive: true });
-    window.addEventListener('keydown', stop);
+      event.preventDefault();
+      cancelScroll();
+      if (location.hash !== link.hash) history.pushState(null, '', link.hash);
 
-    const animate = (time) => {
-      if (started === undefined) started = time;
-      const progress = Math.min((time - started) / duration, 1);
-      const eased = progress < 0.5 ? 4 * progress ** 3 : 1 - (-2 * progress + 2) ** 3 / 2;
-      window.scrollTo({ top: start + (destination - start) * eased, behavior: 'instant' });
-      if (progress < 1) {
-        frame = requestAnimationFrame(animate);
-      } else {
-        stop();
-        const hadTabindex = target.hasAttribute('tabindex');
-        if (!hadTabindex) target.setAttribute('tabindex', '-1');
-        target.focus({ preventScroll: true });
-        if (!hadTabindex)
-          target.addEventListener('blur', () => target.removeAttribute('tabindex'), { once: true });
-      }
-    };
-    frame = requestAnimationFrame(animate);
+      const start = window.scrollY;
+      const offset = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+      const destination = Math.max(0, target.getBoundingClientRect().top + start - offset);
+      const duration = 1400;
+      let frame;
+      let started;
+      const stop = () => {
+        cancelAnimationFrame(frame);
+        window.removeEventListener('wheel', stop);
+        window.removeEventListener('touchstart', stop);
+        window.removeEventListener('keydown', stop);
+        cancelScroll = () => {};
+      };
+      cancelScroll = stop;
+      window.addEventListener('wheel', stop, { passive: true });
+      window.addEventListener('touchstart', stop, { passive: true });
+      window.addEventListener('keydown', stop);
+
+      const animate = (time) => {
+        if (started === undefined) started = time;
+        const progress = Math.min((time - started) / duration, 1);
+        const eased = progress < 0.5 ? 4 * progress ** 3 : 1 - (-2 * progress + 2) ** 3 / 2;
+        window.scrollTo({ top: start + (destination - start) * eased, behavior: 'instant' });
+        if (progress < 1) {
+          frame = requestAnimationFrame(animate);
+        } else {
+          stop();
+          const hadTabindex = target.hasAttribute('tabindex');
+          if (!hadTabindex) target.setAttribute('tabindex', '-1');
+          target.focus({ preventScroll: true });
+          if (!hadTabindex)
+            target.addEventListener('blur', () => target.removeAttribute('tabindex'), { once: true });
+        }
+      };
+      frame = requestAnimationFrame(animate);
+    });
   });
 }
 
@@ -337,7 +351,7 @@ function setupPage() {
   updateCaseStudyCards();
   addCaseStudyNavigation();
   addPageScrollToggle();
-  addHeroScroll();
+  addSectionScroll();
 }
 
 document.addEventListener('DOMContentLoaded', setupPage);

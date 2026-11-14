@@ -1,3 +1,7 @@
+import { setupAnalytics } from './analytics/client.js';
+
+setupAnalytics(import.meta.env?.VITE_ANALYTICS_ENDPOINT);
+
 // Mobile navigation
 document.addEventListener('headerLoaded', () => {
   const navToggle = document.querySelector('.mobile-nav-toggle');

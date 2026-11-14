@@ -96,7 +96,7 @@
   // Content remains above the scene, so let shapes respond through empty areas
   // without putting their rectangular hit areas over links and controls.
   const controlSelector =
-    'a, button, input, select, textarea, .season-preview, [role="button"], [role="scrollbar"], [contenteditable="true"]';
+    'a, button, input, select, textarea, [role="button"], [role="scrollbar"], [contenteditable="true"]';
   const shapeAt = (x, y) =>
     shapes
       .slice()

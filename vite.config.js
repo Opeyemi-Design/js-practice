@@ -8,8 +8,6 @@ const pages = [
   'about-me.html',
   'contact-me.html',
   'explorations.html',
-  'ui-explorations.html',
-  'coding.html',
   ...['companies', 'case-studies'].flatMap((dir) =>
     readdirSync(dir)
       .filter((name) => name.endsWith('.html'))

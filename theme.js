@@ -18,8 +18,6 @@
   const media = matchMedia('(prefers-color-scheme: dark)');
   const valid = ['light', 'dark', 'system', 'seasonal'];
   let choice = 'system';
-  let previewSeason = '';
-  let previewControl;
   try {
     const saved = localStorage.getItem(key);
     if (valid.includes(saved)) choice = saved;
@@ -43,11 +41,12 @@
     if (day >= 320 && day <= 620) return 'spring';
     if (day >= 621 && day <= 921) return 'summer';
     if (day >= 922 && day <= 1220) return 'fall';
+    // The base winter range runs from December 21 through March 19.
     return 'winter';
   }
   // Apply the chosen mode and update the appearance control.
   function apply() {
-    const current = choice === 'seasonal' && previewSeason ? previewSeason : season(new Date());
+    const current = season(new Date());
     const theme =
       choice === 'seasonal'
         ? current
@@ -58,7 +57,6 @@
           : choice;
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme === 'dark' ? 'dark' : 'light';
-    if (previewControl) previewControl.hidden = choice !== 'seasonal';
     document.querySelectorAll('[data-theme-choice]').forEach((button) => {
       const selected = button.dataset.themeChoice === choice;
       button.setAttribute('aria-pressed', String(selected));
@@ -71,37 +69,7 @@
     });
   }
 
-  // Temporary visual testing control. Remove when the portfolio is ready to deploy.
-  function setupSeasonPreview() {
-    previewControl = document.createElement('div');
-    previewControl.className = 'season-preview';
-    previewControl.innerHTML = `
-      <label for="season-preview-select">Season preview</label>
-      <div class="season-preview__select">
-        <select id="season-preview-select">
-          <option value="">Automatic (date)</option>
-          <option value="spring">Spring</option>
-          <option value="summer">Summer</option>
-          <option value="fall">Fall</option>
-          <option value="winter">Winter</option>
-          <option value="halloween">Halloween</option>
-          <option value="christmas">Christmas</option>
-        </select>
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="m6 9 6 6 6-6" />
-        </svg>
-      </div>
-    `;
-    previewControl.querySelector('select').addEventListener('change', (event) => {
-      previewSeason = event.target.value;
-      apply();
-    });
-    document.body.appendChild(previewControl);
-    apply();
-  }
-
   apply();
-  document.addEventListener('DOMContentLoaded', setupSeasonPreview);
   media.addEventListener('change', apply);
   document.addEventListener('headerLoaded', () => {
     document.querySelectorAll('[data-theme-choice]').forEach((button) =>

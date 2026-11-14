@@ -23,9 +23,7 @@ function updateActiveNavigation() {
         ? path === '/' || path === '/index.html' || path.startsWith('/companies/')
         : href === '/case-studies.html'
           ? path === href || path.startsWith('/case-studies/')
-          : href === '/explorations.html'
-            ? ['/explorations.html', '/ui-explorations.html', '/coding.html'].includes(path)
-            : path === href;
+          : path === href;
     if (active) link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
   });

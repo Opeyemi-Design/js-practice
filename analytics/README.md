@@ -1,6 +1,6 @@
 # Portfolio analytics
 
-The portfolio sends events to a Cloudflare Worker on the free plan. The Worker adds the UTC timestamp and approximate country and region, then appends a row to the private Google Sheet. Page URLs are reduced to their paths and referrers to their hostnames. Device, browser and OS are estimates. The device model is included only when the browser supplies one.
+The portfolio sends events to a Cloudflare Worker on the free plan. The Worker adds the timestamp in Toronto time and the approximate country and region, then appends a row to the private Google Sheet. A timestamp looks like `Nov 14, 2026 at 1:52:38 PM EST` and uses `EDT` during daylight saving time. Page URLs are reduced to their paths and referrers to their hostnames. Device, browser and OS are estimates. The device model is included only when the browser supplies one.
 
 ## Set up the Worker
 

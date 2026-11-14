@@ -6,7 +6,26 @@ const pagePattern = /^\/(?:[a-z0-9-]+(?:\/[a-z0-9-]+)?\.html)?$/;
 const hostnamePattern = /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z][a-z0-9-]{0,62}$/i;
 const maxBodyBytes = 2048;
 const encoder = new TextEncoder();
+const timestampFormat = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'America/Toronto',
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: true,
+  timeZoneName: 'short',
+});
 let cachedToken;
+
+function formatTimestamp(date) {
+  const parts = Object.fromEntries(
+    timestampFormat.formatToParts(date).map(({ type, value }) => [type, value]),
+  );
+  const { month, day, year, hour, minute, second, dayPeriod, timeZoneName } = parts;
+  return `${month} ${day}, ${year} at ${hour}:${minute}:${second} ${dayPeriod} ${timeZoneName}`;
+}
 
 function encodeBase64Url(bytes) {
   return btoa(String.fromCharCode(...bytes))
@@ -159,7 +178,7 @@ export default {
     const { country, region } = request.cf ?? {};
     const countryCode = country !== 'XX' && /^[A-Z]{2}$/.test(country ?? '') ? country : '';
     const row = [
-      new Date().toISOString(),
+      formatTimestamp(new Date()),
       event.event,
       event.page,
       event.referringSite,
